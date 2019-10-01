@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <td>Username</td>
+        <td><input type="text" [(ngModel)] = "username"></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="text" [(ngModel)] = "password"></td>
+    </tr>
+    <tr *ngIf="invalidInputs">
+        <td>{{validation}}</td>
+    </tr>
+    <tr>
+        <td><button type="submit" id="btn_submit" (click)="login()">Submit</button></td>
+    </tr>
+</table>

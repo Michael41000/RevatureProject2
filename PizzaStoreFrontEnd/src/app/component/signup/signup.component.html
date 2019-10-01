@@ -1,0 +1,38 @@
+<table>
+    <tr>
+        <td>First Name</td>
+        <td><input type="text" [(ngModel)]="firstName"></td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td><input type="text" [(ngModel)]="lastName"></td>
+    </tr>
+    <tr>
+        <td>Username</td>
+        <td><input type="text" [(ngModel)]="username"></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="password" [(ngModel)]="password"></td>
+    </tr>
+    <tr>
+        <td>Street Address</td>
+        <td><input type="text" [(ngModel)]="streetAddress"></td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td><input type="text" [(ngModel)]="city"></td>
+    </tr>
+    <tr>
+        <td>State</td>
+        <td><input type="text" [(ngModel)]="state"></td>
+    </tr>
+    <tr>
+        <td>Zip code</td>
+        <td><input type="number" [(ngModel)]="zipcode"></td>
+    </tr>
+    <tr *ngIf="invalidInputs">{{validation}}</tr>
+    <tr>
+        <td><button type="submit" (click)="createAccount()">Create Account</button></td>
+    </tr>
+</table>
