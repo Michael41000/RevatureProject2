@@ -4,11 +4,11 @@ phases:
       runtime-versions:
         nodejs: 10
       commands:
+      - cd PizzaStoreFrontEnd
       - npm install -g @angular/cli
       - npm install --save-dev @angular-devkit/build-angular
     build:
       commands:
-        - cd PizzaStoreFrontEnd
         - ng build
     post_build:
       commands:
