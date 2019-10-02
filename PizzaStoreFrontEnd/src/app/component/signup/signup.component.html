@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <tr>
         <td>First Name</td>
         <td><input type="text" [(ngModel)]="firstName"></td>
@@ -31,8 +31,10 @@
         <td>Zip code</td>
         <td><input type="number" [(ngModel)]="zipcode"></td>
     </tr>
-    <tr *ngIf="invalidInputs">{{validation}}</tr>
+    <tr *ngIf="invalidInputs">
+        <td colspan="2">{{validation}}</td>
+    </tr>
     <tr>
-        <td><button type="submit" (click)="createAccount()">Create Account</button></td>
+        <td colspan="2"><button type="submit" (click)="createAccount()">Create Account</button></td>
     </tr>
 </table>
