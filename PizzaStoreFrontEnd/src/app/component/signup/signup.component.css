@@ -1,0 +1,10 @@
+table {
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align: center;
+}
+
+tr {
+    border-top: hidden;
+}
