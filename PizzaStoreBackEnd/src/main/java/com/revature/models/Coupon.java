@@ -6,44 +6,59 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "coupon")
 public class Coupon {
 	@Id
 	@Column(name = "c_id")
-	@SequenceGenerator(sequenceName="coupon_id_maker", name="c_seq")
-    @GeneratedValue(generator="c_seq", strategy=GenerationType.SEQUENCE)
-	private int coupon_id;
-	private double discount_percent;
-	private double code;
-	private String descriptor;
+	@SequenceGenerator(sequenceName = "coupon_id_maker", name = "c_seq")
+	@GeneratedValue(generator = "c_seq", strategy = GenerationType.SEQUENCE)
+	private int couponId;
 	
+	@Column(name = "discount_percent")
+	private double discountPercent;
+	
+	@Column(name="code")
+	private double code;
+	
+	@Column(name="description")
+	private String description;
+
 	public Coupon() {
 		super();
 	}
 
-	public Coupon(int coupon_id, double discount_percent, double code, String descriptor) {
+	public Coupon(int couponId, double discountPercent, double code, String description) {
 		super();
-		this.coupon_id = coupon_id;
-		this.discount_percent = discount_percent;
+		this.couponId = couponId;
+		this.discountPercent = discountPercent;
 		this.code = code;
-		this.descriptor = descriptor;
+		this.description = description;
 	}
 
-	public int getCoupon_id() {
-		return coupon_id;
+	public Coupon(double discountPercent, double code, String description) {
+		super();
+		this.discountPercent = discountPercent;
+		this.code = code;
+		this.description = description;
 	}
 
-	public void setCoupon_id(int coupon_id) {
-		this.coupon_id = coupon_id;
+	public int getCouponId() {
+		return couponId;
 	}
 
-	public double getDiscount_percent() {
-		return discount_percent;
+	public void setCouponId(int couponId) {
+		this.couponId = couponId;
 	}
 
-	public void setDiscount_percent(double discount_percent) {
-		this.discount_percent = discount_percent;
+	public double getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public void setDiscountPercent(double discountPercent) {
+		this.discountPercent = discountPercent;
 	}
 
 	public double getCode() {
@@ -54,17 +69,18 @@ public class Coupon {
 		this.code = code;
 	}
 
-	public String getDescriptor() {
-		return descriptor;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptor(String descriptor) {
-		this.descriptor = descriptor;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public String toString() {
-		return "Coupon [coupon_id=" + coupon_id + ", discount_percent=" + discount_percent + ", code=" + code
-				+ ", descriptor=" + descriptor + "]";
-	} 
+		return "Coupon [couponId=" + couponId + ", discountPercent=" + discountPercent + ", code=" + code
+				+ ", description=" + description + "]";
+	}
+
 }

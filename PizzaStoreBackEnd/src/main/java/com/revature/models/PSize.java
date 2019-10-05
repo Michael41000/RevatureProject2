@@ -6,43 +6,54 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "psize")
 public class PSize {
 	@Id
 	@Column(name = "ps_id")
-	@SequenceGenerator(sequenceName="psize_id_maker", name="ps_seq")
-    @GeneratedValue(generator="ps_seq", strategy=GenerationType.SEQUENCE)
-	private int psize_id;
-	
-	private String psize_name;
+	@SequenceGenerator(sequenceName = "psize_id_maker", name = "ps_seq")
+	@GeneratedValue(generator = "ps_seq", strategy = GenerationType.SEQUENCE)
+	private int psizeId;
+
+	@Column(name = "psize_name")
+	private String psizeName;
+
+	@Column(name = "multipler")
 	private int multiplier;
-	
+
 	public PSize() {
 		super();
 	}
 
-	public PSize(int psize_id, String psize_name, int multiplier) {
+	public PSize(String psizeName, int multiplier) {
 		super();
-		this.psize_id = psize_id;
-		this.psize_name = psize_name;
+		this.psizeName = psizeName;
 		this.multiplier = multiplier;
 	}
 
-	public int getPsize_id() {
-		return psize_id;
+	public PSize(int psizeId, String psizeName, int multiplier) {
+		super();
+		this.psizeId = psizeId;
+		this.psizeName = psizeName;
+		this.multiplier = multiplier;
 	}
 
-	public void setPsize_id(int psize_id) {
-		this.psize_id = psize_id;
+	public int getPsizeId() {
+		return psizeId;
 	}
 
-	public String getPsize_name() {
-		return psize_name;
+	public void setPsizeId(int psizeId) {
+		this.psizeId = psizeId;
 	}
 
-	public void setPsize_name(String psize_name) {
-		this.psize_name = psize_name;
+	public String getPsizeName() {
+		return psizeName;
+	}
+
+	public void setPsizeName(String psizeName) {
+		this.psizeName = psizeName;
 	}
 
 	public int getMultiplier() {
@@ -55,7 +66,6 @@ public class PSize {
 
 	@Override
 	public String toString() {
-		return "PSize [psize_id=" + psize_id + ", psize_name=" + psize_name + ", multiplier=" + multiplier + "]";
+		return "PSize [psizeId=" + psizeId + ", psizeName=" + psizeName + ", multiplier=" + multiplier + "]";
 	}
-	
 }

@@ -6,45 +6,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "role")
 public class Role {
 	@Id
 	@Column(name = "r_id")
-	@SequenceGenerator(sequenceName="role_id_maker", name="r_seq")
-    @GeneratedValue(generator="r_seq", strategy=GenerationType.SEQUENCE)
-	private int role_id;
-	private String role_name;
-	
+	@SequenceGenerator(sequenceName = "role_id_maker", name = "r_seq")
+	@GeneratedValue(generator = "r_seq", strategy = GenerationType.SEQUENCE)
+	private int roleId;
+	private String roleName;
+
 	public Role() {
 		super();
 	}
-	
-	public Role(int role_id, String role_name) {
+
+	public Role(String roleName) {
 		super();
-		this.role_id = role_id;
-		this.role_name = role_name;
+		this.roleName = roleName;
 	}
-	
-	public int getR_id() {
-		return role_id;
+
+	public Role(int roleId, String roleName) {
+		super();
+		this.roleId = roleId;
+		this.roleName = roleName;
 	}
-	
-	public void setR_id(int r_id) {
-		this.role_id = r_id;
+
+	public int getRoleId() {
+		return roleId;
 	}
-	
-	public String getRole_name() {
-		return role_name;
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
-	
-	public void setRole_name(String role_name) {
-		this.role_name = role_name;
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [r_id=" + role_id + ", role_name=" + role_name + "]";
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + "]";
 	}
-	
+
 }

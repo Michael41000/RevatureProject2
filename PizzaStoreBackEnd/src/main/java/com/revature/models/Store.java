@@ -1,37 +1,52 @@
 package com.revature.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "store")
 public class Store {
 	@Id
-	@SequenceGenerator(sequenceName="store_id_maker", name="s_seq")
-	@GeneratedValue(generator="s_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(sequenceName = "store_id_maker", name = "s_seq")
+	@GeneratedValue(generator = "s_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "s_id")
-	private int store_id;
+	private int storeId;
+
+	@OneToOne
+	@JoinColumn(name = "location_id")
 	private Location location;
-	
+
 	public Store() {
 		super();
 	}
 
-	public Store(int store_id, Location location) {
+	public Store(Location location) {
 		super();
-		this.store_id = store_id;
 		this.location = location;
 	}
 
-	public int getStore_id() {
-		return store_id;
+	public Store(int storeId, Location location) {
+		super();
+		this.storeId = storeId;
+		this.location = location;
 	}
 
-	public void setStore_id(int store_id) {
-		this.store_id = store_id;
+	public int getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
 	}
 
 	public Location getLocation() {
@@ -44,6 +59,7 @@ public class Store {
 
 	@Override
 	public String toString() {
-		return "Store [store_id=" + store_id + ", location=" + location + "]";
-	} 
+		return "Store [storeId=" + storeId + ", location=" + location + "]";
+	}
+
 }

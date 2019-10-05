@@ -16,7 +16,7 @@ DROP TABLE topping_type CASCADE CONSTRAINTS;
 
 CREATE TABLE store(
     s_id NUMBER (10) PRIMARY KEY,
-    location_id NUMBER (10)
+    location_id NUMBER (10) UNIQUE
 );
 
 CREATE TABLE location(
@@ -62,7 +62,7 @@ CREATE TABLE psize(
 CREATE TABLE pizza_inventory_item(
     pizza_id NUMBER (10),                       -- JOIN TABLE does not have primary key, Many to Many Relationship
     ii_id NUMBER (10),
-    amount NUMBER(1)
+    amount NUMBER(10)
 );
 
 CREATE TABLE person(
@@ -85,7 +85,7 @@ CREATE TABLE person_pizza(
     pizza_id NUMBER (10)
 );
 
-CREATE TABLE porder(
+    CREATE TABLE porder(
     o_id NUMBER (10) PRIMARY KEY,
     person_id NUMBER (10),
     store_id NUMBER (10),
