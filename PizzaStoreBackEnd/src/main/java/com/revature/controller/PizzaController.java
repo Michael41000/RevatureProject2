@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,32 +13,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Coupon;
 import com.revature.models.Pizza;
+import com.revature.services.PizzaService;
 
 @RequestMapping("pizzas")
 @RestController
 @CrossOrigin
 public class PizzaController {
-	 @GetMapping(value="{id}")
-	   public Pizza getPizzaById(@PathVariable("id") int id ) {
-		   return null;
-	   }
-	 @GetMapping
-	   public List<Pizza> getPizzas() {
-		   return null;
-	   }
-	 @PostMapping(consumes="application/json" )
-	   public Pizza createPizza(@RequestBody Pizza pizza) {
-		   return null;
-	   }
-	 @PutMapping(value="{id}",consumes="application/json")
-	   public Pizza updatePizza(@PathVariable("id") int id,@RequestBody Pizza pizza) {
-		   pizza.setPizzaId(id);
-		   return null;
-	   }
-	 @DeleteMapping(value="{id}")
-	   public void deletePizza(@PathVariable("id")int id) {
-		
-	   }
+
+	@Autowired
+	PizzaService ps;
+
+	@GetMapping(value = "{id}")
+	public Pizza getPizzaById(@PathVariable("id") int id) {
+		return ps.getPizzaById(id);
+	}
+
+	@GetMapping
+	public List<Pizza> getPizzas() {
+		return ps.getAllPizzas();
+	}
+
+	@PostMapping(consumes = "application/json")
+	public Pizza createPizza(@RequestBody Pizza pizza) {
+		return ps.createPizza(pizza);
+	}
+
+	@PutMapping(value = "{id}", consumes = "application/json")
+	public Pizza updatePizza(@PathVariable("id") int id, @RequestBody Pizza pizza) {
+		pizza.setPizzaId(id);
+		return ps.updatePizza(pizza);
+	}
+
+	@DeleteMapping(value = "{id}")
+	public Pizza deletePizza(@PathVariable("id") int id) {
+		return ps.deletePizza(ps.getPizzaById(id));
+	}
 }
