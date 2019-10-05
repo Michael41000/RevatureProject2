@@ -9,32 +9,37 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Topping_Type")
-public class Topping_Type {
+@Table(name = "topping_type")
+public class ToppingType {
 	@Id
-	@SequenceGenerator(sequenceName = "tt_id_maker", name = "a_seq")
-	@GeneratedValue(generator = "a_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(sequenceName = "tt_id_maker", name = "tt_seq")
+	@GeneratedValue(generator = "tt_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "tt_id")
-	private int tt_id;
+	private int ttId;
 	@Column(name = "type")
 	private String type;
 
-	public Topping_Type() {
+	public ToppingType() {
 		super();
 	}
 
-	public Topping_Type(int tt_id, String type) {
+	public ToppingType(String type) {
 		super();
-		this.tt_id = tt_id;
 		this.type = type;
 	}
 
-	public int getTt_id() {
-		return tt_id;
+	public ToppingType(int ttId, String type) {
+		super();
+		this.ttId = ttId;
+		this.type = type;
 	}
 
-	public void setTt_id(int tt_id) {
-		this.tt_id = tt_id;
+	public int getTtId() {
+		return ttId;
+	}
+
+	public void setTtId(int ttId) {
+		this.ttId = ttId;
 	}
 
 	public String getType() {
@@ -47,6 +52,7 @@ public class Topping_Type {
 
 	@Override
 	public String toString() {
-		return "Topping_Type [tt_id=" + tt_id + ", type=" + type + "]";
+		return "ToppingType [ttId=" + ttId + ", type=" + type + "]";
 	}
+
 }
