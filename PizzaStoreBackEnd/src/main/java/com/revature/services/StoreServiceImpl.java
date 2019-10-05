@@ -3,10 +3,12 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.models.Store;
 import com.revature.repositories.StoreRepository;
 
+@Service
 public class StoreServiceImpl implements StoreService {
 
 	@Autowired
