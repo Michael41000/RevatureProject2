@@ -16,6 +16,7 @@ public class ToppingType {
 	@GeneratedValue(generator = "tt_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "tt_id")
 	private int ttId;
+	
 	@Column(name = "type")
 	private String type;
 
