@@ -40,4 +40,17 @@ public class PersonServiceImpl implements PersonService {
 		return (List<Person>) personr.findAll();
 	}
 
+	@Override
+	public void testCheckUsername(String username) {
+		// TODO Auto-generated method stub
+		if (personr.checkUsername(username)) {
+			System.out.println("this username is not in the database");
+		}
+		else{
+			System.out.println("in the database");
+		}
+		
+		
+	}
+
 }
