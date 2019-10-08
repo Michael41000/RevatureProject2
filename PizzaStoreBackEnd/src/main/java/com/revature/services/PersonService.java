@@ -14,4 +14,6 @@ public interface PersonService {
 	public Person deletePerson(Person person);
 	
 	public List<Person> getAllPerson();
+
+	public Person loginPerson(Person person);
 }
