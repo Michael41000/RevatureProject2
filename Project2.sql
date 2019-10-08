@@ -233,7 +233,7 @@ INSERT INTO psize VALUES(psize_id_maker.nextval, 'Large', 3);
 INSERT INTO store VALUES(store_id_maker.nextval, 2);
 INSERT INTO store VALUES(store_id_maker.nextval, 3);
 
-INSERT INTO person VALUES(person_id_maker.nextval, 'Head', 'Employee', 'he', 'password', 1, 2);
+INSERT INTO person VALUES(person_id_maker.nextval, 'Head', 'Employee', 'he', 'pass', 1, 2);
 
 INSERT INTO topping_type VALUES(tt_id_maker.nextval, 'Sauce');
 INSERT INTO topping_type VALUES(tt_id_maker.nextval, 'Cheese');

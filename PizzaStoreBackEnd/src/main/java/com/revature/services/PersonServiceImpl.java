@@ -42,4 +42,9 @@ public class PersonServiceImpl implements PersonService {
 		return (List<Person>) personr.findAll();
 	}
 
+	@Override
+	public Person loginPerson(Person person) {
+		return personr.findByUsernameAndPassword(person.getUsername(), person.getPassword());
+	}
+
 }
