@@ -9,13 +9,17 @@ export class GoogleService {
 
   constructor(private http: HttpClient) { }
 
-  googleAPIKey: string = "AIzaSyBsNAo5ISq5iwUdnL-AaeqmMHUrF2qi3iU";
+
+ 
+
+  apiKey: string = "AIzaSyDTztgokgTSMkNvFVhnxkDLGbRwCH5oFik";
 
   addressToCoordinates(streetAddress: string = "", city: string = "", state: string = "", zipcode: number = 0): Observable<any> {
-    return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetAddress.replace(/ /g, "+")},+${city.replace(/ /g, "+")},+${state.replace(/ /g, "+")}+${zipcode}&key=${this.googleAPIKey}`)
+    return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetAddress.replace(/ /g, "+")},+${city.replace(/ /g, "+")},+${state.replace(/ /g, "+")}+${zipcode}&key=${this.apiKey}`)
   }
 
   coordinatesToAddress(latitude: number = 0, longitude: number = 0): Observable<any> {
-    return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${this.googleAPIKey}`)
+    return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${this.apiKey}`)
   }
 }
+
