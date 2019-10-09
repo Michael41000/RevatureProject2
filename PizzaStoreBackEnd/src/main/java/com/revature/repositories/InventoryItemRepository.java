@@ -15,4 +15,5 @@ public interface InventoryItemRepository extends CrudRepository<InventoryItem, I
 	List<Location> findByLocation(Location location);
 	List<InventoryItem> findAllByStore(Store store); 
 	List<Topping> findByTopping(Topping topping);
+	List<InventoryItem> findByStoreStoreId(int storeId);
 }

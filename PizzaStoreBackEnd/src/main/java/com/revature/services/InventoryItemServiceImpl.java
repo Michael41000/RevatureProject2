@@ -50,4 +50,9 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 		return iir.findAllByStore(store);
 	}
 
+	@Override
+	public List<InventoryItem> getInventoryItemsByStoreId(int storeId) {
+		return iir.findByStoreStoreId(storeId);
+	}
+
 }

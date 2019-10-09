@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.InventoryItem;
@@ -33,6 +34,11 @@ public class InventoryItemController {
 	@GetMapping()
 	public List<InventoryItem> getInventoryItems() {
 		return iis.getAllInventoryItems();
+	}
+	
+	@GetMapping(params = "store")
+	public List<InventoryItem> getInventoryItemsByStore(@RequestParam("store") int storeId) {
+		return iis.getInventoryItemsByStoreId(storeId);
 	}
 
 	@PostMapping(consumes = "application/json")

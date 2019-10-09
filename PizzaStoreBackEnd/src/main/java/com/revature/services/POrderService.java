@@ -17,4 +17,6 @@ public interface POrderService {
 	public List<POrder> findAllPOrders();
 	
 	public List<POrder> customerViewOrders(Person person);
+
+	public List<POrder> getPOrdersByStore(int storeId);
 }

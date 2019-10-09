@@ -15,4 +15,5 @@ public interface POrderRepository extends CrudRepository<POrder, Integer>{
 	List<POrder> findByStore(Store store);
 	
 	List<POrder> findAllByPerson(Person person);
+	List<POrder> findByStoreStoreIdOrderByTimeOrdered(int storeId);
 }

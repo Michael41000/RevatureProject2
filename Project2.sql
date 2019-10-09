@@ -50,7 +50,7 @@ CREATE TABLE topping_type(
 CREATE TABLE pizza(
     p_id NUMBER (10) PRIMARY KEY,
     psize_id NUMBER (10),
-    is_specialty NUMBER(1)
+    is_specialty VARCHAR2(1)
 );
 
 CREATE TABLE psize(
@@ -60,6 +60,7 @@ CREATE TABLE psize(
 );
 
 CREATE TABLE pizza_inventory_item(
+    pii_id NUMBER(10) PRIMARY KEY,
     pizza_id NUMBER (10),                       -- JOIN TABLE does not have primary key, Many to Many Relationship
     ii_id NUMBER (10),
     amount NUMBER(10)
@@ -139,6 +140,8 @@ DROP SEQUENCE pizza_id_maker;
 /
 DROP SEQUENCE psize_id_maker;
 /
+DROP SEQUENCE pii_id_maker;
+/
 DROP SEQUENCE person_id_maker;
 /
 DROP SEQUENCE role_id_maker;
@@ -181,6 +184,12 @@ CREATE SEQUENCE pizza_id_maker
     /
 
 CREATE SEQUENCE psize_id_maker
+    MINVALUE 1
+    START WITH 1
+    INCREMENT BY 1;
+    /
+    
+CREATE SEQUENCE pii_id_maker
     MINVALUE 1
     START WITH 1
     INCREMENT BY 1;
@@ -309,13 +318,13 @@ INSERT INTO topping VALUES(topping_id_maker.nextval, 'Coriander', 23, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Paprika', 19, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Black Pepper', 17, 5);
 
+
+
 --insert into role values(role_id_maker.nextval, 'Customer');
 
 --insert into location values(location_id_maker.nextval, 50, 50, 'somewhere');
 --
 --INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 3, 5);  -- test
-
-INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 1);
 
 select * from role;
 select * from location;
@@ -353,6 +362,11 @@ END;
 CALL add_inventory_to_store(1);
 -- Fill inventory of Store 2
 CALL add_inventory_to_store(2);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 1, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 3, 1);
 
 commit;
 
