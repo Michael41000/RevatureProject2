@@ -45,8 +45,13 @@ public class POrderServiceImpl implements POrderService {
 	}
 
 	@Override
-	public List<POrder> customerViewOrders(Person person) {
-		return porderr.findAllByPerson(person);
+	public List<POrder> customerViewOrders(int personId) {
+		return porderr.findByPersonPersonId(personId);
+	}
+
+	@Override
+	public List<POrder> findAllPOrderByStoreId(int storeId) {
+		return porderr.findByStoreStoreId(storeId);
 	}
 
 }

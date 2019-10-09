@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.POrder;
@@ -35,9 +36,17 @@ public class POrderController {
 		return pos.findAllPOrders();
 	}
 
-	@PostMapping(value = "showPO", consumes = "application/json")
-	public List<POrder> showPOrders(@RequestBody Person person){
-		return pos.customerViewOrders(person);
+
+	@GetMapping(params = "storeId")
+	public List<POrder> showPOrdersByStoreId(@RequestParam("storeId") int storeId){
+		return pos.findAllPOrderByStoreId(storeId); 
+	}
+	
+	
+	
+	@GetMapping(params = "personId")
+	public List<POrder> showPOrders(@RequestParam("personId") int personId){
+		return pos.customerViewOrders(personId);
 	}
 	
 	@PostMapping(consumes = "application/json")
