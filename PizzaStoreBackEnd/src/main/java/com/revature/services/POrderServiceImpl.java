@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.POrder;
+import com.revature.models.Person;
 import com.revature.repositories.POrderRepository;
 
 @Service
@@ -41,6 +42,11 @@ public class POrderServiceImpl implements POrderService {
 	@Override
 	public List<POrder> findAllPOrders() {
 		return (List<POrder>) porderr.findAll();
+	}
+
+	@Override
+	public List<POrder> customerViewOrders(Person person) {
+		return porderr.findAllByPerson(person);
 	}
 
 }

@@ -42,4 +42,9 @@ public class PizzaServiceImpl implements PizzaService {
 		return (List<Pizza>) pizzar.findAll();
 	}
 
+	@Override
+	public List<Pizza> isSpecialty() {
+		return pizzar.findAllByIsSpecialtyTrue();
+	}
+
 }

@@ -50,7 +50,7 @@ CREATE TABLE topping_type(
 CREATE TABLE pizza(
     p_id NUMBER (10) PRIMARY KEY,
     psize_id NUMBER (10),
-    isSpecialty NUMBER(1)
+    is_specialty NUMBER(1)
 );
 
 CREATE TABLE psize(
@@ -309,6 +309,19 @@ INSERT INTO topping VALUES(topping_id_maker.nextval, 'Coriander', 23, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Paprika', 19, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Black Pepper', 17, 5);
 
+--insert into role values(role_id_maker.nextval, 'Customer');
+
+--insert into location values(location_id_maker.nextval, 50, 50, 'somewhere');
+--
+--INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 3, 5);  -- test
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 1);
+
+select * from role;
+select * from location;
+select * from person;
+select * from pizza;
+
 CREATE OR REPLACE PROCEDURE add_inventory_to_store(store_id IN NUMBER) 
 IS
 BEGIN
@@ -356,5 +369,5 @@ commit;
 --JOIN location l2 ON s.location_id = l2.l_id
 --ORDEr BY ii.i_id;
 
-
+SELECT * FROM person;
 

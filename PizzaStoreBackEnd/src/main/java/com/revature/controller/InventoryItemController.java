@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.InventoryItem;
+import com.revature.models.Store;
 import com.revature.services.InventoryItemService;
 
 @RestController
@@ -38,6 +39,11 @@ public class InventoryItemController {
 	public InventoryItem createInvenoryItem(@RequestBody InventoryItem inventoryitem) {
 		return iis.createInventoryItem(inventoryitem);
 
+	}
+	
+	@PostMapping(value = "showII", consumes = "application/json")
+	public List<InventoryItem> showInventoryItems(@RequestBody Store store){
+		return iis.getInventoryItemsByStore(store);
 	}
 
 	@PutMapping(value = "{id}", consumes = "application/json")

@@ -48,6 +48,17 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
+	public void testCheckUsername(String username) {
+		// TODO Auto-generated method stub
+		if (personr.checkUsername(username)) {
+			System.out.println("username good");
+		}
+		else {
+			System.out.println("username bad");
+		}
+  }
+  
+  @Override
 	public Person loginPerson(Person person) {
 		return personr.findByUsernameAndPassword(person.getUsername(), person.getPassword());
 	}

@@ -10,4 +10,13 @@ import com.revature.models.Person;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Integer>{
 	Person findByUsernameAndPassword(String username, String password);
+	
+	boolean existsByUsername (String username);
+	
+	default boolean checkUsername(String username) {
+		if (existsByUsername(username)) {
+			return false;
+		}
+		return true;
+	}
 }

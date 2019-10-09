@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.POrder;
+import com.revature.models.Person;
 import com.revature.services.POrderService;
 
 @RequestMapping("porders")
@@ -34,6 +35,11 @@ public class POrderController {
 		return pos.findAllPOrders();
 	}
 
+	@PostMapping(value = "showPO", consumes = "application/json")
+	public List<POrder> showPOrders(@RequestBody Person person){
+		return pos.customerViewOrders(person);
+	}
+  
 	@PostMapping(consumes = "application/json")
 	public POrder createPOrder(@RequestBody POrder porder) {
 		return pos.createPOrder(porder);
