@@ -35,6 +35,11 @@ public class POrderController {
 	public List<POrder> getPOrder() {
 		return pos.findAllPOrders();
 	}
+	
+	@GetMapping(params = "store")
+	public List<POrder> getPOrdersByStore(@RequestParam("store") int storeId) {
+		return pos.getPOrdersByStore(storeId);
+	}
 
 
 	@GetMapping(params = "storeId")

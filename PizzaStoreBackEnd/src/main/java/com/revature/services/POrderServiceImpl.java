@@ -54,4 +54,9 @@ public class POrderServiceImpl implements POrderService {
 		return porderr.findByStoreStoreId(storeId);
 	}
 
+	@Override
+	public List<POrder> getPOrdersByStore(int storeId) {
+		return porderr.findByStoreStoreIdOrderByTimeOrdered(storeId);
+	}
+
 }

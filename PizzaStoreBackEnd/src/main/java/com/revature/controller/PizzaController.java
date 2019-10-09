@@ -31,6 +31,7 @@ public class PizzaController {
 
 	@GetMapping
 	public List<Pizza> getPizzas() {
+		System.out.println(ps.getAllPizzas());
 		return ps.isSpecialty();
 	}
   

@@ -60,6 +60,7 @@ CREATE TABLE psize(
 );
 
 CREATE TABLE pizza_inventory_item(
+    pii_id NUMBER(10) PRIMARY KEY,
     pizza_id NUMBER (10),                       -- JOIN TABLE does not have primary key, Many to Many Relationship
     ii_id NUMBER (10),
     amount NUMBER(10)
@@ -138,6 +139,8 @@ DROP SEQUENCE pizza_id_maker;
 /
 DROP SEQUENCE psize_id_maker;
 /
+DROP SEQUENCE pii_id_maker;
+/
 DROP SEQUENCE person_id_maker;
 /
 DROP SEQUENCE role_id_maker;
@@ -180,6 +183,12 @@ CREATE SEQUENCE pizza_id_maker
     /
 
 CREATE SEQUENCE psize_id_maker
+    MINVALUE 1
+    START WITH 1
+    INCREMENT BY 1;
+    /
+    
+CREATE SEQUENCE pii_id_maker
     MINVALUE 1
     START WITH 1
     INCREMENT BY 1;
@@ -324,6 +333,9 @@ commit;
 --
 --INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 1, 1);  -- test
 
+select * from role;
+select * from location;
+select * from person;
 INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 'T');
 
 --select * from role;
@@ -362,6 +374,11 @@ END;
 CALL add_inventory_to_store(1);
 -- Fill inventory of Store 2
 CALL add_inventory_to_store(2);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 1, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 3, 1);
 
 commit;
 
