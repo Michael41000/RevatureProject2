@@ -9,5 +9,5 @@ import com.revature.models.Role;
 
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Integer>{
-	List<Role> findByRoleName(String roleName);
+	Role findByRoleName(String roleName);
 }

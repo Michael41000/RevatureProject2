@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,13 +33,23 @@ public class PersonController {
 
 	@GetMapping
 	public List<Person> getPersons() {
-		ps.testCheckUsername("he");
 		return ps.getAllPerson();
 	}
 
 	@PostMapping(consumes = "application/json")
 	public Person createPerson(@RequestBody Person person) {
+		System.out.println(person);
 		return ps.createPerson(person);
+	}
+	
+	@PostMapping(value = "login", consumes = "application/json")
+	public Person loginPerson(@RequestBody Person person, HttpServletResponse response) {
+		Person loginPerson = ps.loginPerson(person);
+		if (loginPerson == null) {
+			response.setStatus(422);
+		}
+		return loginPerson;
+		
 	}
 
 	@PutMapping(value = "{id}", consumes = "application/json")
@@ -51,5 +62,4 @@ public class PersonController {
 	public Person deletePerson(@PathVariable("id") int id) {
 		return ps.deletePerson(ps.getPersonById(id));
 	}
-	
 }

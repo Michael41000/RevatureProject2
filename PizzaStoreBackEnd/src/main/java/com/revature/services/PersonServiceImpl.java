@@ -13,9 +13,14 @@ public class PersonServiceImpl implements PersonService {
 
 	@Autowired
 	PersonRepository personr;
+	@Autowired
+	RoleService rs;
 	
 	@Override
 	public Person createPerson(Person person) {
+		System.out.println(person);
+		person.setRole(rs.getRoleByName("Customer"));
+		
 		personr.save(person);
 		return person;
 	}
@@ -51,6 +56,11 @@ public class PersonServiceImpl implements PersonService {
 		else {
 			System.out.println("username bad");
 		}
+  }
+  
+  @Override
+	public Person loginPerson(Person person) {
+		return personr.findByUsernameAndPassword(person.getUsername(), person.getPassword());
 	}
 
 }

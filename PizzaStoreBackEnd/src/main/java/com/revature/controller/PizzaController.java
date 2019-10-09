@@ -33,8 +33,7 @@ public class PizzaController {
 	public List<Pizza> getPizzas() {
 		return ps.isSpecialty();
 	}
-
-
+  
 	@PostMapping(consumes = "application/json")
 	public Pizza createPizza(@RequestBody Pizza pizza) {
 		return ps.createPizza(pizza);

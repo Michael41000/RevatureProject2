@@ -16,4 +16,6 @@ public interface PersonService {
 	public List<Person> getAllPerson();
 	
 	public void testCheckUsername(String username);
+
+	public Person loginPerson(Person person);
 }

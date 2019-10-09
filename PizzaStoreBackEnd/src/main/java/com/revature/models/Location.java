@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Location {
 	@Id
 	@Column(name = "l_id")
-	@SequenceGenerator(sequenceName = "location_id_maker", name = "l_seq")
+	@SequenceGenerator(sequenceName = "location_id_maker", name = "l_seq", allocationSize = 1)
 	@GeneratedValue(generator = "l_seq", strategy = GenerationType.SEQUENCE)
 	private int locationId;
 
