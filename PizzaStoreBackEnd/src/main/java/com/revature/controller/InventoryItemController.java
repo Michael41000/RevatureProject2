@@ -47,10 +47,15 @@ public class InventoryItemController {
 
 	}
 	
-	@PostMapping(value = "showII", consumes = "application/json")
-	public List<InventoryItem> showInventoryItems(@RequestBody Store store){
-		return iis.getInventoryItemsByStore(store);
+	@GetMapping(params = "storeId")
+	public List<InventoryItem> showInventoryItems(@RequestParam("storeId") int storeId){
+		return iis.getInventoryItemsByStoreStoreId(storeId);
 	}
+	
+//	@PostMapping(value = "showII", consumes = "application/json")
+//	public List<InventoryItem> showInventoryItems(@RequestBody Store store){
+//		return iis.getInventoryItemsByStore(store);
+//	}
 
 	@PutMapping(value = "{id}", consumes = "application/json")
 	public InventoryItem updateInventoryItem(@PathVariable("id") int id, @RequestBody InventoryItem inventoryitem) {

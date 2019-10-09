@@ -19,4 +19,7 @@ public interface POrderService {
 	public List<POrder> customerViewOrders(Person person);
 
 	public List<POrder> getPOrdersByStore(int storeId);
+	public List<POrder> customerViewOrders(int personId);
+	
+	public List<POrder> findAllPOrderByStoreId(int storeId);
 }

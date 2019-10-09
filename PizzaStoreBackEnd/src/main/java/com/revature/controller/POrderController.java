@@ -41,9 +41,17 @@ public class POrderController {
 		return pos.getPOrdersByStore(storeId);
 	}
 
-	@PostMapping(value = "showPO", consumes = "application/json")
-	public List<POrder> showPOrders(@RequestBody Person person){
-		return pos.customerViewOrders(person);
+
+	@GetMapping(params = "storeId")
+	public List<POrder> showPOrdersByStoreId(@RequestParam("storeId") int storeId){
+		return pos.findAllPOrderByStoreId(storeId); 
+	}
+	
+	
+	
+	@GetMapping(params = "personId")
+	public List<POrder> showPOrders(@RequestParam("personId") int personId){
+		return pos.customerViewOrders(personId);
 	}
   
 	@PostMapping(consumes = "application/json")

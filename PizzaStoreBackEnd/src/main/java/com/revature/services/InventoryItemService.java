@@ -19,4 +19,5 @@ public interface InventoryItemService {
 	public List<InventoryItem> getInventoryItemsByStore(Store store);
 
 	public List<InventoryItem> getInventoryItemsByStoreId(int storeId);
+	public List<InventoryItem> getInventoryItemsByStoreStoreId(int storeId);
 }
