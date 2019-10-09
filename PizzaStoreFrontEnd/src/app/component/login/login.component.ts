@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { person } from 'src/app/model/person';
+import { PersonService } from 'src/app/service/person.service';
+import { Subscription } from 'rxjs';
+import { GlobalService } from 'src/app/service/global.service';
 
 @Component({
   selector: 'app-login',
@@ -7,31 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personService: PersonService, private globalService: GlobalService) { }
 
   ngOnInit() {
   }
 
-  username: string;
-  password: string;
-  validation: string = "All 2 fields are required";
-  invalidInputs: boolean = false;
+  invalidCredentials: boolean = false;
+  person: person = new person();
+  loginSubscription: Subscription;
 
   login() {
-    console.log("It works");
-    console.log(this.username);
-    console.log(this.password);
-    this.validateInputFields();
+    this.invalidCredentials = false;
+    console.log(this.person.username);
+    console.log(this.person.password);
+    this.loginSubscription = this.personService.getPersonByUsernameAndPassword(this.person)
+      .subscribe(
+        (response) => {
+          this.globalService.currentPerson = response;
+          console.log(this.globalService.currentPerson);
+        },
+        (response) => {
+          this.invalidCredentials = true;
+        }
+      );
   }
 
-  validateInputFields() {
-    if (this.username == undefined || this.password == undefined ||
-      this.username === "" || this.password === "") {
-      this.invalidInputs = true;
-    }
-    else {
-      this.invalidInputs = false;
-    }
+  ngOnDestory() {
+    this.loginSubscription.unsubscribe();
   }
 
 }

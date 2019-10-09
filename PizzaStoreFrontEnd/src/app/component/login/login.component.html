@@ -1,16 +1,15 @@
 <table class="table borderless">
         <tr>
             <td>Username</td>
-            <td><input type="text" [(ngModel)]="username"></td>
+            <td><input type="text" [(ngModel)]="person.username"></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" [(ngModel)]="password"></td>
-        </tr>
-        <tr *ngIf="invalidInputs">
-            <td colspan="2">{{validation}}</td>
+            <td><input type="text" [(ngModel)]="person.password"></td></tr>
+        <tr *ngIf="invalidCredentials">
+            <td colspan="2" style="color: red">Invalid Credentials</td>
         </tr>
         <tr>
-            <td colspan="2"><button type="submit" id="btn_submit" (click)="login()">Submit</button></td>
+            <td colspan="2"><button type="submit" id="btn_submit" (click)="login()">Login</button></td>
         </tr>
 </table>
