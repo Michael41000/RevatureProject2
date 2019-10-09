@@ -38,6 +38,7 @@ public class PersonController {
 
 	@PostMapping(consumes = "application/json")
 	public Person createPerson(@RequestBody Person person) {
+		System.out.println(person);
 		return ps.createPerson(person);
 	}
 	
