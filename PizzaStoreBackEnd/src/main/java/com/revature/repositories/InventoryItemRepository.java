@@ -13,6 +13,6 @@ import com.revature.models.Topping;
 @Repository
 public interface InventoryItemRepository extends CrudRepository<InventoryItem, Integer>{
 	List<Location> findByLocation(Location location);
-	List<InventoryItem> findAllByStore(Store store); 
+	List<InventoryItem> findAllByStoreStoreId(int storeId); 
 	List<Topping> findByTopping(Topping topping);
 }
