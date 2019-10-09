@@ -13,9 +13,14 @@ public class PersonServiceImpl implements PersonService {
 
 	@Autowired
 	PersonRepository personr;
+	@Autowired
+	RoleService rs;
 	
 	@Override
 	public Person createPerson(Person person) {
+		System.out.println(person);
+		person.setRole(rs.getRoleByName("Customer"));
+		
 		personr.save(person);
 		return person;
 	}
