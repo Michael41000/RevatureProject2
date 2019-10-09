@@ -13,7 +13,7 @@ export class person {
     role: role;
     favorites: pizza[];
 
-    constructor(personId: number, firstName: string, lastName: string, username: string, password: string, location: location, role: role, favorites: pizza[]) {
+    constructor(personId?: number, firstName?: string, lastName?: string, username?: string, password?: string, location?: location, role?: role, favorites?: pizza[]) {
         this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
