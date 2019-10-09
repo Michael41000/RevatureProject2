@@ -3,10 +3,12 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.models.Person;
 import com.revature.repositories.PersonRepository;
 
+@Service
 public class PersonServiceImpl implements PersonService {
 
 	@Autowired
@@ -44,13 +46,11 @@ public class PersonServiceImpl implements PersonService {
 	public void testCheckUsername(String username) {
 		// TODO Auto-generated method stub
 		if (personr.checkUsername(username)) {
-			System.out.println("this username is not in the database");
+			System.out.println("username good");
 		}
-		else{
-			System.out.println("in the database");
+		else {
+			System.out.println("username bad");
 		}
-		
-		
 	}
 
 }

@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.revature.repository")
+@EnableJpaRepositories("com.revature.repositories")
 @ComponentScan("com.revature")
-@EntityScan("com.revature.model")
+@EntityScan("com.revature.models")
 public class PizzaStoreBackEndApplication {
 
 	public static void main(String[] args) {

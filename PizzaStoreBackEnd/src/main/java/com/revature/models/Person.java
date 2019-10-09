@@ -22,7 +22,7 @@ public class Person {
 	@Id
 	@SequenceGenerator(sequenceName = "person_id_maker", name = "p_seq")
 	@GeneratedValue(generator = "p_seq", strategy = GenerationType.SEQUENCE)
-	@Column(name = "p_id")
+	@Column(name = "person_id")
 	private int personId;
 
 	@Column(name = "first_name")

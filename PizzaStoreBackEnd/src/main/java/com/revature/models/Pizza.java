@@ -32,7 +32,7 @@ public class Pizza {
 	private PSize psize;
 
 	@Type(type = "true_false")
-	@Column(name = "isSpecialty", nullable = false)
+	@Column(name = "is_specialty", nullable = false)
 	private boolean isSpecialty;
 
 	@ManyToMany

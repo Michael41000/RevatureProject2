@@ -3,10 +3,12 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.models.Pizza;
 import com.revature.repositories.PizzaRepository;
 
+@Service
 public class PizzaServiceImpl implements PizzaService {
 
 	@Autowired
@@ -38,6 +40,11 @@ public class PizzaServiceImpl implements PizzaService {
 	@Override
 	public List<Pizza> getAllPizzas() {
 		return (List<Pizza>) pizzar.findAll();
+	}
+
+	@Override
+	public List<Pizza> isSpecialty() {
+		return pizzar.findAllByIsSpecialtyTrue();
 	}
 
 }

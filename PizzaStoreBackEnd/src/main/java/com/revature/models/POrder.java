@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "porder")
 public class POrder {
 	@Id
-	@Column(name = "po_id")
+	@Column(name = "o_id")
 	@SequenceGenerator(sequenceName = "porder_id_maker", name = "po_seq")
 	@GeneratedValue(generator = "po_seq", strategy = GenerationType.SEQUENCE)
 	private int porderId;

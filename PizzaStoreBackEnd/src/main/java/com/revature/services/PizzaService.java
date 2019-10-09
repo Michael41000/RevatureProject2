@@ -14,4 +14,6 @@ public interface PizzaService {
 	public Pizza deletePizza(Pizza pizza);
 	
 	public List<Pizza> getAllPizzas();
+	
+	public List<Pizza> isSpecialty();
 }

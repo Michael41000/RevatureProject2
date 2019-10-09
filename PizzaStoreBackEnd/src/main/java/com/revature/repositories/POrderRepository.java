@@ -13,4 +13,6 @@ import com.revature.models.Store;
 public interface POrderRepository extends CrudRepository<POrder, Integer>{
 	List<POrder> findByPerson(Person person);
 	List<POrder> findByStore(Store store);
+	
+	List<POrder> findAllByPerson(Person person);
 }
