@@ -22,7 +22,7 @@ export class StoreComponent implements OnInit {
       this.storeId = +params["id"];
     });
 
-    this.storeService.getStore(this.storeId).subscribe(
+    this.storeSub = this.storeService.getStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.store = response;
