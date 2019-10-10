@@ -15,8 +15,6 @@ public interface POrderService {
 	public POrder deletePOrder(POrder pOrder);
 	
 	public List<POrder> findAllPOrders();
-	
-	public List<POrder> customerViewOrders(Person person);
 
 	public List<POrder> getPOrdersByStore(int storeId);
 	public List<POrder> customerViewOrders(int personId);
