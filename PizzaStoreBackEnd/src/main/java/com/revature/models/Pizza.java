@@ -34,7 +34,7 @@ public class Pizza {
 	private boolean isSpecialty;
 
 	@OneToMany
-	@JoinColumn(name = "pii_id")
+	@JoinColumn(name = "pizza_id")
 	private List<PizzaInventoryItem> inventoryItems;
 
 	public Pizza() {
