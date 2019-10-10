@@ -16,4 +16,8 @@ export class PersonService {
     return this.http.post<person>(`${this.globalService.hostName}/persons/login`, person);
   };
 
+  updatePerson(person: person) : Observable<person> {
+    return this.http.put<person>(`${this.globalService.hostName}/persons/${person.personId}`, person);
+  }
+
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { GoogleService } from "src/app/service/google.service";
 import { SignupcontrollerService } from "src/app/service/signupcontroller.service";
-import { location } from "src/app/model/location";
 import { person } from "src/app/model/person";
 import { Router } from '@angular/router';
+import { location } from 'src/app/model/location';
 
 @Component({
   selector: "app-signup",
@@ -15,55 +15,45 @@ export class SignupComponent implements OnInit {
     private googleService: GoogleService,
     private locationService: SignupcontrollerService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.person = new person();
+    this.person.location = new location();
+  }
 
-  streetAddress: string;
-  city: string;
-  zipcode: number;
-  state: string;
   invalidInputs: boolean = false;
   validation: string = "Some fields are empty";
-  lat: number;
-  long: number;
-  locationid: number;
-  name: string;
-  location: location;
-  person: person = new person();
+  person: person;
+  usernameTaken: boolean = false;
+
 
   createAccount() {
-    this.validateInputs();
-    this.googleService
-      .addressToCoordinates(
-        this.streetAddress,
-        this.city,
-        this.state,
-        this.zipcode
-      )
-      .subscribe(response => {
-        console.log(response);
-        this.lat = response.results[0].geometry.location.lat;
-        this.long = response.results[0].geometry.location.lng;
-        this.name = `${this.streetAddress}, ${this.city} ${this.state} ${this.zipcode}`;
-        this.location = new location(null, this.lat, this.long, this.name);
-        console.log(this.name);
-        this.locationService.addLocation(this.location).subscribe(response => {
+    this.validateInputs()
+    if (this.invalidInputs === false) {
+      this.googleService
+        .addressToCoordinates(
+          this.person.location.streetAddress,
+          this.person.location.city,
+          this.person.location.state,
+          this.person.location.zipcode
+        )
+        .subscribe(response => {
           console.log(response);
-          this.person.location = response;
-          console.log(this.person);
-          this.locationService.addPerson(this.person).subscribe(response => {
-            console.log(response);
-            this.router.navigate(["login"]).then( (e) => {
-              if (e) {
-                console.log("Navigation is successful!");
-              } else {
-                console.log("Navigation has failed!");
-              }
-            });
-          });
+          this.person.location.latitude = response.results[0].geometry.location.lat;
+          this.person.location.longitude = response.results[0].geometry.location.lng;
+          this.person.location.name = `${this.person.location.streetAddress}, ${this.person.location.city} ${this.person.location.state}, ${this.person.location.zipcode}`;
+          this.locationService.addPerson(this.person).subscribe(
+            (response) => {
+              console.log(response);
+              this.router.navigate(["login"]).then((e) => { });
+            },
+            (response) => {
+              this.usernameTaken = true;
+            }
+          );
         });
-      });
+    }
   }
 
   validateInputs() {
@@ -72,18 +62,18 @@ export class SignupComponent implements OnInit {
       this.person.password == undefined ||
       this.person.firstName == undefined ||
       this.person.lastName == undefined ||
-      this.streetAddress == undefined ||
-      this.city == undefined ||
-      this.zipcode == undefined ||
-      this.state == undefined ||
+      this.person.location.streetAddress == undefined ||
+      this.person.location.city == undefined ||
+      this.person.location.zipcode == undefined ||
+      this.person.location.state == undefined ||
       this.person.username === "" ||
       this.person.password === "" ||
       this.person.firstName === "" ||
       this.person.lastName === "" ||
-      this.streetAddress === "" ||
-      this.city === "" ||
-      this.state === "" ||
-      this.zipcode == null
+      this.person.location.streetAddress === "" ||
+      this.person.location.city === "" ||
+      this.person.location.state === "" ||
+      this.person.location.zipcode == null
     ) {
       this.invalidInputs = true;
     } else {
