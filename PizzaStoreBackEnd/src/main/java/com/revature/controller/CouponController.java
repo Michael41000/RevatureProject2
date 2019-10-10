@@ -36,6 +36,7 @@ public class CouponController {
 
 	@PostMapping(consumes = "application/json")
 	public Coupon createCoupon(@RequestBody Coupon coupon) {
+		System.out.println(coupon);
 		return cs.createCoupon(coupon);
 	}
 

@@ -108,7 +108,8 @@ CREATE TABLE coupon(
     c_id NUMBER (10) PRIMARY KEY,
     discount_percent NUMBER (10, 2),
     code NUMBER (10),
-    description VARCHAR2 (500)
+    description VARCHAR2 (500),
+    active VARCHAR2(1)
 );
 
 ALTER TABLE store ADD CONSTRAINT fk_store_location FOREIGN KEY (location_id) REFERENCES location(l_id) ON DELETE CASCADE;
@@ -321,7 +322,7 @@ INSERT INTO topping VALUES(topping_id_maker.nextval, 'Coriander', 23, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Paprika', 19, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Black Pepper', 17, 5);
 
-insert into coupon values (coupon_id_maker.nextval, 10, 55, '???');
+insert into coupon values (coupon_id_maker.nextval, 10, 55, '???', 'T');
 INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 1, 1);  -- test
 
 
@@ -380,9 +381,9 @@ CALL add_inventory_to_store(1);
 CALL add_inventory_to_store(2);
 
 INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
-INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 1, 1);
-INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 2, 1);
-INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 3, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 1, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 3, 1);
 
 commit;
 
