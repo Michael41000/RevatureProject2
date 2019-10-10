@@ -34,7 +34,7 @@ import { StoreInventoryComponent } from './component/store/store-inventory/store
     NgbModule,
     StoreRoutingModule
   ],
-  providers: [InventoryitemService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
