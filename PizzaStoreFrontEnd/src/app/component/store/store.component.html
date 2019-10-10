@@ -1,0 +1,10 @@
+<table class="table borderless" *ngIf="store!=null">
+    <tr>
+        <td>{{ store.location.name }}</td>
+    </tr>
+    <tr>
+        <td><button (click)="showOrders()">Show Orders</button></td>
+        <td><button (click)="showInventory()">Show Inventory</button></td>
+    </tr>
+</table>
+<router-outlet></router-outlet>
