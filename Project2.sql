@@ -23,6 +23,10 @@ CREATE TABLE location(
     l_id NUMBER (10) PRIMARY KEY,
     latitude NUMBER (10, 6),
     longitude NUMBER (10, 6),
+    street_address VARCHAR2(100),
+    city VARCHAR2(100),
+    state VARCHAR2(100),
+    zipcode NUMBER(5),
     name VARCHAR2 (200)    
 );
 
@@ -70,7 +74,7 @@ CREATE TABLE person(
     person_id NUMBER (10) PRIMARY KEY,
     first_name VARCHAR2(100),
     last_name VARCHAR2 (100),
-    username VARCHAR2 (100),
+    username VARCHAR2 (100) UNIQUE,
     password VARCHAR2 (100),
     location_id NUMBER (10),
     role_id NUMBER (10)
@@ -227,12 +231,12 @@ CREATE SEQUENCE tt_id_maker
 INSERT INTO role VALUES(role_id_maker.nextval, 'Customer');
 INSERT INTO role VALUES(role_id_maker.nextval, 'Employee');
 
-INSERT INTO location VALUES(location_id_maker.nextval, 39.656755, -79.9283087, 'West Run Apartments');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6318875, -79.9559044, 'Pizza Store #1');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6266512, -79.9600794, 'Pizza Store #2');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.650808, -79.943543, 'Kroger');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6608103, -79.9309657, 'Animal Farm');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6465469, -79.9385532, 'Organic Farm');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.656755, -79.9283087, '500 Koehler Dr', 'Morgantown', 'West Virginia', 26508, 'West Run Apartments');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6273613, -79.9637484, '54 Clay St', 'Morgantown', 'West Virginia', 26501, 'Pizza Store #1');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6263481, -79.9576029, '300 Pleasant St', 'Morgantown', 'West Virginia', 26501,'Pizza Store #2');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6264131, -79.9904338, '500 Suncrest Towne Centre Drive', 'Morgantown', 'West Virginia', 26505, 'Kroger'); 
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6578539, -79.934223, null, 'Morgantown', 'West Virginia', 26505, 'Animal Farm');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6449645, -79.9430651, 'WV-705', 'Morgantown', 'West Virginia', 26505, 'Organic Farm');
 
 INSERT INTO psize VALUES(psize_id_maker.nextval, 'Small', 1);
 INSERT INTO psize VALUES(psize_id_maker.nextval, 'Medium', 2);
