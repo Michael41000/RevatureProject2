@@ -37,9 +37,12 @@ public class PersonController {
 	}
 
 	@PostMapping(consumes = "application/json")
-	public Person createPerson(@RequestBody Person person) {
-		System.out.println(person);
-		return ps.createPerson(person);
+	public Person createPerson(@RequestBody Person person, HttpServletResponse response) {
+		Person createPerson = ps.createPerson(person);
+		if (createPerson == null) {
+			response.setStatus(409);
+		}
+		return createPerson;
 	}
 	
 	@PostMapping(value = "login", consumes = "application/json")
@@ -53,9 +56,13 @@ public class PersonController {
 	}
 
 	@PutMapping(value = "{id}", consumes = "application/json")
-	public Person updatePerson(@PathVariable("id") int id, @RequestBody Person person) {
+	public Person updatePerson(@PathVariable("id") int id, @RequestBody Person person, HttpServletResponse response) {
 		person.setPersonId(id);
-		return ps.updatePerson(person);
+		Person updatePerson = ps.updatePerson(person);
+		if (updatePerson == null) {
+			response.setStatus(409);
+		}
+		return updatePerson;
 	}
 
 	@DeleteMapping(value = "{id}")
