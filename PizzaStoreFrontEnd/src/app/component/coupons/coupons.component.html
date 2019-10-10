@@ -1,0 +1,24 @@
+<table class="table table-striped">
+    <tr>
+        <td>Discount Percent: <input type="number" [(ngModel)]="discountPercent"></td>
+        <td>Code: <input type="number" [(ngModel)]="code"></td>
+        <td>Description: <input type="text" [(ngModel)]="description"></td>
+        <td><button (click)="createCoupon()">Create</button></td>
+    </tr>
+    <tr>
+        <th>Id</th>
+        <th>Discount Percent</th>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Active</th>
+    </tr>
+    <tr *ngFor="let coupon of coupons">
+        <td>{{ coupon.couponId }}</td>
+        <td>{{ coupon.discountPercent }}%</td>
+        <td>{{ coupon.code }}</td>
+        <td>{{ coupon.description }}</td>
+        <td>{{ coupon.active }}</td>
+        <td *ngIf="coupon.active"><button (click)="deactivate(coupon)">Deactivate</button></td>
+        <td *ngIf="!coupon.active"><button (click)="activate(coupon)">Activate</button></td>
+    </tr>
+</table>

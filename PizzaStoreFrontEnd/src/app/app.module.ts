@@ -14,6 +14,7 @@ import { StoreComponent } from './component/store/store.component';
 import { StoreOrdersComponent } from './component/store/store-orders/store-orders.component';
 import { StoreRoutingModule } from './component/store/store-routing.module';
 import { StoreInventoryComponent } from './component/store/store-inventory/store-inventory.component';
+import { CouponsComponent } from './component/coupons/coupons.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { StoreInventoryComponent } from './component/store/store-inventory/store
     StoresComponent,
     StoreComponent,
     StoreOrdersComponent,
-    StoreInventoryComponent
+    StoreInventoryComponent,
+    CouponsComponent
   ],
   imports: [
     BrowserModule,
