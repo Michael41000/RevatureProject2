@@ -20,7 +20,7 @@ import { StoreInventoryComponent } from './component/store/store-inventory/store
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
     StoresComponent,
     StoreComponent,
     StoreOrdersComponent,
