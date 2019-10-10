@@ -17,22 +17,25 @@
     </tr>
     <tr>
         <td>Street Address</td>
-        <td><input type="text" [(ngModel)]="streetAddress"></td>
+        <td><input type="text" [(ngModel)]="person.location.streetAddress"></td>
     </tr>
     <tr>
         <td>City</td>
-        <td><input type="text" [(ngModel)]="city"></td>
+        <td><input type="text" [(ngModel)]="person.location.city"></td>
     </tr>
     <tr>
         <td>State</td>
-        <td><input type="text" [(ngModel)]="state"></td>
+        <td><input type="text" [(ngModel)]="person.location.state"></td>
     </tr>
     <tr>
         <td>Zip code</td>
-        <td><input type="number" [(ngModel)]="zipcode"></td>
+        <td><input type="number" [(ngModel)]="person.location.zipcode"></td>
     </tr>
     <tr *ngIf="invalidInputs">
-        <td colspan="2">{{validation}}</td>
+        <td colspan="2" style="color: red">{{validation}}</td>
+    </tr>
+    <tr *ngIf="usernameTaken">
+        <td colspan="2" style="color: red">Username is Taken</td>
     </tr>
     <tr>
         <td colspan="2"><button type="submit" (click)="createAccount()">Create Account</button></td>
