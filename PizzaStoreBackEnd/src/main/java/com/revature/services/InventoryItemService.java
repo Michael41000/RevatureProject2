@@ -17,4 +17,6 @@ public interface InventoryItemService {
 	public List<InventoryItem> getAllInventoryItems();
 	
 	public List<InventoryItem> getInventoryItemsByStoreStoreId(int storeId);
+
+	public List<InventoryItem> getInventoryItemsByStoreId(int storeId);
 }
