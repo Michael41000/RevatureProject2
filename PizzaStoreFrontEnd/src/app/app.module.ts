@@ -9,6 +9,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { StoresComponent } from './component/stores/stores.component';
+import { StoreComponent } from './component/store/store.component';
+import { StoreOrdersComponent } from './component/store/store-orders/store-orders.component';
+import { StoreRoutingModule } from './component/store/store-routing.module';
+import { StoreInventoryComponent } from './component/store/store-inventory/store-inventory.component';
 
 @NgModule({
   declarations: [
@@ -16,15 +21,20 @@ import { ProfileComponent } from './component/profile/profile.component';
     LoginComponent,
     SignupComponent,
     ProfileComponent
+    StoresComponent,
+    StoreComponent,
+    StoreOrdersComponent,
+    StoreInventoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    StoreRoutingModule
   ],
-  providers: [],
+  providers: [InventoryitemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

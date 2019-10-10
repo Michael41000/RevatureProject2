@@ -11,7 +11,7 @@ export class inventoryItem {
     location: location;
     store: store;
 
-    constructor(iiId: number, topping: topping, amountLeft: number, price: number, location: location, store: store) {
+    constructor(iiId?: number, topping?: topping, amountLeft?: number, price?: number, location?: location, store?: store) {
         this.iiId = iiId;
         this.topping = topping;
         this.amountLeft = amountLeft;

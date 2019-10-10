@@ -1,0 +1,12 @@
+<table class="table borderless">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+    </tr>
+    <tr *ngFor="let store of stores" (click)="goToStore(store)">
+        <td>{{ store.storeId }}</td>
+        <td>{{ store.location.name }}</td>
+        <td>{{ store.location.latitude }} {{ store.location.longitude }}</td>
+    </tr>
+</table>
