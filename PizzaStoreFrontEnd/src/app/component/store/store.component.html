@@ -1,0 +1,43 @@
+<table class="table borderless" *ngIf="store!=null">
+    <tr>
+        <td>{{ store.location.name }}</td>
+    </tr>
+    <tr>
+        <td><button (click)="showOrders()">Show Orders</button></td>
+        <td><button (click)="showInventory()">Show Inventory</button></td>
+    </tr>
+</table>
+<router-outlet></router-outlet>
+    <!--
+        
+    </ng-container>
+    <ng-container *ngIf="isDisplayingInventoryItems">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Amount Left</th>
+            <th>Price</th>
+            <th>Location</th>
+        </tr>
+        <ng-container *ngFor="let inventoryitem of tableData">
+            <tr>
+                <td>{{ inventoryitem.iiId }}</td>
+                <td>{{ inventoryitem.topping.toppingName }}</td>
+                <td>{{ inventoryitem.amountLeft }}</td>
+                <td>{{ inventoryitem.price | currency: 'USD' }}</td>
+                <td>{{ inventoryitem.location.name }}</td>
+                <td *ngIf="inventoryitem.reorder===false || inventoryitem.reorder===undefined"><button
+                        (click)="changeReorder(inventoryitem)">Reorder</button></td>
+                <td *ngIf="inventoryitem.reorder===true"><button (click)="changeReorder(inventoryitem)">Cancel
+                    </button></td>
+            </tr>
+            <tr *ngIf="inventoryitem.reorder===true">
+                <td>Order Amount</td>
+                <td><input type="text" ></td>
+                <td>New Price</td>
+                <td><input type="text"></td>
+                <td><button (click)="confirmOrder()">Confirm</button></td>
+            </tr>
+        </ng-container>
+    </ng-container> 
+</table> -->

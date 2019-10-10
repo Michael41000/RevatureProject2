@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Person Ordered</th>
+        <th>Time Ordered</th>
+    </tr>
+    <tr *ngFor="let order of orders">
+        <td>{{ order.porderId }}</td>
+        <td>{{ order.person.firstName }} {{ order.person.lastName }}</td>
+        <td>{{ order.timeOrdered }}</td>
+    </tr>
+</table>
