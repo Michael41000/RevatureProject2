@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class InventoryItem {
 	@Id
 	@Column(name = "i_id")
-	@SequenceGenerator(sequenceName = "ii_id_maker", name = "ii_seq")
+	@SequenceGenerator(sequenceName = "ii_id_maker", name = "ii_seq", allocationSize = 1)
 	@GeneratedValue(generator = "ii_seq", strategy = GenerationType.SEQUENCE)
 	private int iiId;
 	

@@ -380,9 +380,9 @@ CALL add_inventory_to_store(1);
 -- Fill inventory of Store 2
 CALL add_inventory_to_store(2);
 
-INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 'T');
 INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 1, 1);
-INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 2, 2);
 INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 3, 1);
 
 commit;

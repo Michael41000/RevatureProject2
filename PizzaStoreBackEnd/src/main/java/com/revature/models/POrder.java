@@ -3,6 +3,7 @@ package com.revature.models;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 public class POrder {
 	@Id
 	@Column(name = "o_id")
-	@SequenceGenerator(sequenceName = "porder_id_maker", name = "po_seq")
+	@SequenceGenerator(sequenceName = "porder_id_maker", name = "po_seq", allocationSize = 1)
 	@GeneratedValue(generator = "po_seq", strategy = GenerationType.SEQUENCE)
 	private int porderId;
 
@@ -42,7 +43,7 @@ public class POrder {
 	@JoinColumn(name = "coupon_id")
 	private Coupon coupon;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "porder_pizza", joinColumns = @JoinColumn(name = "porder_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
 	private List<Pizza> pizzasInOrder;
 

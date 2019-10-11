@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class PSize {
 	@Id
 	@Column(name = "ps_id")
-	@SequenceGenerator(sequenceName = "psize_id_maker", name = "ps_seq")
+	@SequenceGenerator(sequenceName = "psize_id_maker", name = "ps_seq", allocationSize = 1)
 	@GeneratedValue(generator = "ps_seq", strategy = GenerationType.SEQUENCE)
 	private int psizeId;
 
