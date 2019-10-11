@@ -16,7 +16,7 @@ public class PizzaInventoryItem {
 
 	@Id
 	@Column(name = "pii_id")
-	@SequenceGenerator(sequenceName = "pii_id_maker", name = "pii_seq")
+	@SequenceGenerator(sequenceName = "pii_id_maker", name = "pii_seq", allocationSize = 1)
 	@GeneratedValue(generator = "pii_seq", strategy = GenerationType.SEQUENCE)
 	private int piiId;
 
@@ -38,6 +38,21 @@ public class PizzaInventoryItem {
 		this.amount = amount;
 	}
 
+	public PizzaInventoryItem(int piiId, InventoryItem inventoryItem, PSize amount) {
+		super();
+		this.piiId = piiId;
+		this.inventoryItem = inventoryItem;
+		this.amount = amount;
+	}
+
+	public int getPiiId() {
+		return piiId;
+	}
+
+	public void setPiiId(int piiId) {
+		this.piiId = piiId;
+	}
+
 	public InventoryItem getInventoryItem() {
 		return inventoryItem;
 	}
@@ -56,7 +71,6 @@ public class PizzaInventoryItem {
 
 	@Override
 	public String toString() {
-		return "PizzaInventoryItem [inventoryItem=" + inventoryItem + ", amount=" + amount + "]";
+		return "PizzaInventoryItem [piiId=" + piiId + ", inventoryItem=" + inventoryItem + ", amount=" + amount + "]";
 	}
-
 }

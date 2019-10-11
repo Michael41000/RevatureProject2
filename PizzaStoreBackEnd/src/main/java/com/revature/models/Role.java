@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Role {
 	@Id
 	@Column(name = "r_id")
-	@SequenceGenerator(sequenceName = "role_id_maker", name = "r_seq")
+	@SequenceGenerator(sequenceName = "role_id_maker", name = "r_seq", allocationSize = 1)
 	@GeneratedValue(generator = "r_seq", strategy = GenerationType.SEQUENCE)
 	private int roleId;
 	

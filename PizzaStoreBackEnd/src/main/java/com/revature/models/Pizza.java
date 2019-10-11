@@ -3,6 +3,7 @@ package com.revature.models;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.Type;
 public class Pizza {
 	@Id
 	@Column(name = "p_id")
-	@SequenceGenerator(sequenceName = "pizza_id_maker", name = "p_seq")
+	@SequenceGenerator(sequenceName = "pizza_id_maker", name = "p_seq", allocationSize = 1)
 	@GeneratedValue(generator = "p_seq", strategy = GenerationType.SEQUENCE)
 	private int pizzaId;
 
@@ -33,7 +34,7 @@ public class Pizza {
 	@Column(name = "is_specialty", nullable = false)
 	private boolean isSpecialty;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "pizza_id")
 	private List<PizzaInventoryItem> inventoryItems;
 

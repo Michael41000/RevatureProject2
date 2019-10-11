@@ -56,6 +56,7 @@ public class POrderController {
   
 	@PostMapping(consumes = "application/json")
 	public POrder createPOrder(@RequestBody POrder porder) {
+		System.out.println(porder);
 		return pos.createPOrder(porder);
 	}
 
