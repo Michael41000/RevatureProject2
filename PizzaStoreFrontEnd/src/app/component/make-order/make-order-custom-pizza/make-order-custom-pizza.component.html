@@ -1,0 +1,54 @@
+<table class="table">
+    <tr>
+        <th>Price</th>
+        <td>{{calculatePizzaPrice(selectedPizzaSize.value) | currency : 'USD'}}</td>
+        <th>Calories</th>
+        <td>{{calculateCalories(selectedPizzaSize.value)}}</td>
+    </tr>
+    <tr>
+        <th>Pizza Size:</th>
+        <td><select #selectedPizzaSize>
+                <ng-container *ngFor="let size of psizes; let i = index">
+                    <option [value]="i">{{size.psizeName}}</option>
+                </ng-container>
+            </select></td>
+    </tr>
+    <ng-container *ngFor="let toppingtype of toppingtypes">
+        <tr>
+            <th>{{toppingtype.type}}</th>
+            <td *ngIf="toppingtype.visible === undefined"><button
+                    (click)="showInventoryItemsByTopping(toppingtype)">Show</button></td>
+            <td *ngIf="toppingtype.visible"><button (click)="hideInventoryItemsByTopping(toppingtype)">Hide</button>
+            </td>
+        </tr>
+        <ng-container *ngIf="toppingtype.visible">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Size</th>
+            </tr>
+            <tr *ngFor="let inventoryItem of toppingTypeInventoryItem.get(toppingtype.ttId); let k = index">
+                <td> {{inventoryItem.iiId }}</td>
+                <td> {{inventoryItem.topping.toppingName }}</td>
+                <td> {{inventoryItem.topping.calories }}</td>
+                <td> {{inventoryItem.location.name }}</td>
+                <td> {{inventoryItem.price | currency : 'USD'}}</td>
+                <td><select #selectedAmount >
+                        <ng-container *ngFor="let size of psizes; let j = index">
+                            <option [value]="j">{{size.psizeName}}</option>
+                        </ng-container>
+                    </select></td>
+                <td *ngIf="inventoryItem.buttonAdd === undefined"><button
+                        (click)="addToPizza(inventoryItem, selectedAmount.value)">Add</button></td>
+                <td *ngIf="inventoryItem.buttonAdd"><button (click)="removeToPizza(inventoryItem)">Remove</button>
+                </td>
+            </tr>
+        </ng-container>
+    </ng-container>
+    <tr>
+        <td><button (click)="addPizzaToOrder(selectedPizzaSize.value)">Add Pizza To Order</button></td>
+    </tr>
+</table>

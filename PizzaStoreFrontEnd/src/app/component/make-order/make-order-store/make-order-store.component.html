@@ -1,0 +1,14 @@
+<table class="table borderless" *ngIf="store!=null">
+    <tr>
+        <td>{{ store.location.name }}</td>
+    </tr>
+    <tr>
+        <td><select (change)="selectChangeHandler($event)">
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="customPizza">Custom pizza</option>
+            <option value="storePizza">Store pizza</option>
+        </select></td>
+    </tr>
+</table>
+
+<router-outlet></router-outlet>
