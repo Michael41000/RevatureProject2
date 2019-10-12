@@ -1,48 +1,54 @@
 <h1>Your Order History</h1>
 
 <table class="table borderless">
-    <tr>
-        <th>Store</th>
-        <th>Date Order</th>
-    </tr>
+    <thead class="thead-dark">
+        <tr>
+            <th>Store</th>
+            <th>Date Order</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
 
     <ng-container *ngFor="let porder of allOrders">
         <tr>
             <td>{{porder.store.location.name}}</td>
             <td>{{porder.timeOrdered}}</td>
-            <td *ngIf="porder.visible === undefined"><button (click) = "show(porder)">show</button></td>
-            <td *ngIf="porder.visible"><button (click) = "hide(porder)">hide</button></td>
+            <td></td>
+            <td *ngIf="porder.visible === undefined"><button (click)="show(porder)">show</button></td>
+            <td *ngIf="porder.visible"><button (click)="hide(porder)">hide</button></td>
         </tr>
         <ng-container *ngIf="porder.visible">
             <ng-container *ngFor="let pizza of porder.pizzasInOrder; let i = index">
                 <tr>
-                    <th>Pizza Size</th>
+                    <thead class="thead-light">
+                        <th>Order: {{i + 1}}</th>
+                    </thead>
                 </tr>
-                <tr>
-                    <td>{{pizza.psize.psizeName}}</td>
-                </tr>
-
                 <tr>
                     <th>Toppings</th>
+                    <th>Name</th>
                     <th>Calories</th>
                     <th>Size</th>
                     <th>Price</th>
                 </tr>
                 <ng-container *ngFor="let i of pizza.inventoryItems">
                     <tr>
+                        <td></td>
                         <td>{{i.inventoryItem.topping.toppingName}}</td>
                         <td>{{i.inventoryItem.topping.calories}}</td>
                         <td>{{i.amount.psizeName}}</td>
                         <td>{{(i.inventoryItem.price * i.amount.multiplier) | currency : 'USD'}}</td>
                     </tr>
                 </ng-container>
-                    <tr>
-                        <td></td>
-                        <td><b>Total Calories:</b> {{toppingTotalCalories(pizza)}}</td>
-                        <td></td>
-                        <td><b>Total Price: </b> {{toppingTotalPrice(pizza) | currency : 'USD'}}</td>
-                    </tr>
-                <br>
+                <tr>
+                    <td><b>Pizza Size:</b> {{pizza.psize.psizeName}}</td>
+                    <td></td>
+                    <td><b>Total Calories:</b> {{toppingTotalCalories(pizza)}}</td>
+                    <td></td>
+                    <td><b>Total Price: </b> {{toppingTotalPrice(pizza) | currency : 'USD'}}</td>
+                </tr>
             </ng-container>
         </ng-container>
         <tr>

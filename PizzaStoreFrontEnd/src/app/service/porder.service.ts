@@ -24,6 +24,4 @@ export class PorderService {
     // return this.http.get<porder[]>(`${this.globalService.hostName}/porders?personId=${personId}`);
     return this.http.get<porder[]>(`http://localhost:8080/porders?personId=1`);
   }
-
-
 }

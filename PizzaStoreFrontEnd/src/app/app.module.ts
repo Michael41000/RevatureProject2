@@ -24,6 +24,7 @@ import { MakeOrderCustomPizzaComponent } from './component/make-order/make-order
 import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make-order-update-custom-pizza/make-order-update-custom-pizza.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
+import { PizzaComponent } from './component/pizza/pizza.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OrderhistoryComponent } from './component/orderhistory/orderhistory.com
     MakeOrderCustomPizzaComponent,
     MakeOrderUpdateCustomPizzaComponent,
     HomepageComponent,
-    OrderhistoryComponent
+    OrderhistoryComponent,
+    PizzaComponent
   ],
   imports: [
     BrowserModule,

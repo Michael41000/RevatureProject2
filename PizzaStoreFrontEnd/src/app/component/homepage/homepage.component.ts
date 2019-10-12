@@ -30,33 +30,11 @@ export class HomepageComponent implements OnInit {
     );
   }
 
-  toppingTotalCalories(pizzaC : pizza){
-    let totalCalories : number = 0;
-
-    for (let c of pizzaC.inventoryItems){
-      totalCalories += (c.inventoryItem.topping.calories * c.amount.multiplier);
-    }
-    return totalCalories * pizzaC.psize.multiplier;
-  }
-
-  toppingTotalPrice(pizzaT : pizza){
-    let total : number = 0; 
-
-    for (let i of pizzaT.inventoryItems){
-      total = total + (i.amount.multiplier * i.inventoryItem.price); 
-    }
-
-    return total * pizzaT.psize.multiplier; 
-  }
-
-  show(pizza : any){
-    pizza.visible = true;
-  }
   
+
   
-  hide(pizza : any){
-    pizza.visible = undefined;
-  }
+
+  
 }
 
 
