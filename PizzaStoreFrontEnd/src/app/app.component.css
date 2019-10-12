@@ -3,6 +3,12 @@ h1 {
 }
 
 ul {
-    padding-left: 40%;
-    border-bottom: 0px;
+    /* padding-left: 40%;
+    border-bottom: 0px; */
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }

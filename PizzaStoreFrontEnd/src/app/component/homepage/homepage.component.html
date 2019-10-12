@@ -1,0 +1,57 @@
+<h1>Welcome {{globalService.currentPerson.firstName}} {{globalService.currentPerson.lastName}}</h1>
+<p> Our Specialty Pizzas </p>
+
+<table class="table borderless">
+  <thead class="thead-dark">
+    <tr>
+      <th>Pizza</th>
+      <th>Size</th>
+      <th>Total Calories</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <ng-container *ngFor="let pizza of allSPizza; let i = index">
+    <tr>
+      <td>{{i + 1}}</td>
+      <td>{{pizza.psize.psizeName}}</td>
+      <td>{{toppingTotalCalories(pizza)}}</td>
+      <td>{{toppingTotalPrice(pizza) | currency : 'USD'}}</td>
+      <td *ngIf="pizza.visible === undefined"> <button (click)=show(pizza)>show</button></td>
+      <td *ngIf="pizza.visible"><button (click)=hide(pizza)>hide</button></td>
+    </tr>
+    <ng-container *ngIf="pizza.visible">
+      <tr>
+        <th>Toppings</th>
+        <th>Name</th>
+        <th>Calories</th>
+        <th>Size</th>
+        <th>Price</th>
+      </tr>
+      <ng-container *ngFor="let p of pizza.inventoryItems">
+        <tr>
+          <td></td>
+          <td>{{p.inventoryItem.topping.toppingName}}</td>
+          <td>{{p.inventoryItem.topping.calories}}</td>
+          <td>{{p.amount.psizeName}}</td>
+          <td>{{(p.amount.multiplier * p.inventoryItem.price) | currency : 'USD'}}</td>
+        </tr>
+      </ng-container>
+      <br />
+      <br />
+      <br />
+
+      <ng-container *ngIf="!(i == allSPizza.length -1)">
+        <thead class="thead-dark">
+          <tr>
+            <th>Pizza</th>
+            <th>Size</th>
+            <th>Total Calories</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</table>

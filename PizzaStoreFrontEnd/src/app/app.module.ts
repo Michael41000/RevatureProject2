@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -14,6 +13,8 @@ import { StoreComponent } from './component/store/store.component';
 import { StoreOrdersComponent } from './component/store/store-orders/store-orders.component';
 import { StoreRoutingModule } from './component/store/store-routing.module';
 import { StoreInventoryComponent } from './component/store/store-inventory/store-inventory.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
+import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { StoreInventoryComponent } from './component/store/store-inventory/store
     StoresComponent,
     StoreComponent,
     StoreOrdersComponent,
-    StoreInventoryComponent
+    StoreInventoryComponent,
+    HomepageComponent,
+    OrderhistoryComponent
   ],
   imports: [
     BrowserModule,
