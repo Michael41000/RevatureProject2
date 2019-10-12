@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -23,6 +22,8 @@ import { MakeOrderSpecialtyPizzaComponent } from './component/make-order/make-or
 import { MakeOrderCurrentOrderComponent } from './component/make-order/make-order-current-order/make-order-current-order.component';
 import { MakeOrderCustomPizzaComponent } from './component/make-order/make-order-custom-pizza/make-order-custom-pizza.component';
 import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make-order-update-custom-pizza/make-order-update-custom-pizza.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
+import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make
     MakeOrderSpecialtyPizzaComponent,
     MakeOrderCurrentOrderComponent,
     MakeOrderCustomPizzaComponent,
-    MakeOrderUpdateCustomPizzaComponent
+    MakeOrderUpdateCustomPizzaComponent,
+    HomepageComponent,
+    OrderhistoryComponent
   ],
   imports: [
     BrowserModule,

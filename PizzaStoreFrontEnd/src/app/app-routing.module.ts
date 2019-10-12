@@ -6,6 +6,8 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { StoresComponent } from './component/stores/stores.component';
 import { CouponsComponent } from './component/coupons/coupons.component';
 import { MakeOrderComponent } from './component/make-order/make-order.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
+import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
 
 
 const routes: Routes = [
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: "stores", component: StoresComponent },
   { path: "coupons", component: CouponsComponent },
   { path: "makeOrder", component: MakeOrderComponent },
+  { path: "homepage", component: HomepageComponent },
+  { path: "orderhistory", component: OrderhistoryComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" }
 ];
 

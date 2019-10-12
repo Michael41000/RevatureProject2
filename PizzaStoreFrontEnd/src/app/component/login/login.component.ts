@@ -3,6 +3,7 @@ import { person } from 'src/app/model/person';
 import { PersonService } from 'src/app/service/person.service';
 import { Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/service/global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { GlobalService } from 'src/app/service/global.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private personService: PersonService, private globalService: GlobalService) { }
+  constructor(private personService: PersonService, private globalService: GlobalService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -29,12 +30,18 @@ export class LoginComponent implements OnInit {
         (response) => {
           this.globalService.currentPerson = response;
           console.log(this.globalService.currentPerson);
+          this.goToHomepage();
         },
         (response) => {
           this.invalidCredentials = true;
         }
       );
   }
+
+  goToHomepage() {                                                // Routes to the Homepage
+    this.router.navigate(["homepage"]).then((e) => { })
+  }
+
 
   ngOnDestory() {
     this.loginSubscription.unsubscribe();
