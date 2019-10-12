@@ -15,6 +15,7 @@ import { StoreRoutingModule } from './component/store/store-routing.module';
 import { StoreInventoryComponent } from './component/store/store-inventory/store-inventory.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
+import { PizzaComponent } from './component/pizza/pizza.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { OrderhistoryComponent } from './component/orderhistory/orderhistory.com
     StoreOrdersComponent,
     StoreInventoryComponent,
     HomepageComponent,
-    OrderhistoryComponent
+    OrderhistoryComponent,
+    PizzaComponent
   ],
   imports: [
     BrowserModule,
