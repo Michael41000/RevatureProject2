@@ -1,0 +1,173 @@
+<!-- <p>managespecpizza works!</p> -->
+<button (click)="createSpecialtyPizza()" >Create Specialty Pizza</button><br>
+<button (click)="updateSpecialtyPizza()" >Update Specialty Pizza</button><br>
+<button (click)="deleteSpecialtyPizza()" >Delete Specialty Pizza</button><br>
+<div style="display: none" id="init">
+    <table>
+        <tr>
+            <td>
+                Pizza ID
+            </td>
+            <td>
+                Pizza Size
+            </td>
+            <td>
+                Toppings | Size | Location
+            </td>
+            <td>
+                Update Pizza
+            </td>
+            <td>
+                Delete Pizza
+            </td>
+        </tr>
+        <tr *ngFor="let p of pizzas">
+            <td>
+                {{p.pizzaId}}
+            </td>
+            <td>
+                {{p.psize.psizeName}}
+            </td>
+            <td>
+                <table>
+                    <tr *ngFor="let ii of p.inventoryItems">
+                        <td>
+                            {{ii.inventoryItem.topping.toppingName}}
+                        </td>
+                        <td>
+                            {{ii.amount.psizeName}}
+                        </td>
+                        <td>
+                            {{ii.inventoryItem.location.name}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <button (click)="onClick($event)" [attr.id]="'u' + p.pizzaId">Update</button>
+            </td>
+            <td>
+                <button (click)="onClick($event)" [attr.id]="'d' + p.pizzaId">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="display: none" id="deleteSP">
+    <!-- Specialty Pizza to Delete: 
+    <input id="pizzaId" type="number"> 
+    <button (click)="deleteSpecialtyPizzaSubmit()" >Submit</button> -->
+</div>
+<div style="display: none" id="createSP"></div>
+<div style="display: none" id="updateSP">
+    <!-- <table>
+        <tr>
+            <td>
+                Pizza ID
+            </td>
+            <td>
+                Pizza Size
+            </td>
+            <td>
+                Toppings
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{clickedPizza.pizzaId}}
+            </td>
+            <td>
+                {{clickedPizza.psize.psizeName}}
+            </td>
+            <td>
+                <table>
+                    <tr *ngFor="let ii of clickedPizza.inventoryItems">
+                        <td>
+                            {{ii.inventoryItem.topping.toppingName}}
+                        </td>
+                    </tr>
+                </table>                
+            </td>
+        </tr>
+    </table> -->
+    <form>
+        Set Size of Pizza:<br>
+        <select id="newSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select> <br>
+        <button (click)="updateSpecialtyPizzaSize()">Update Size</button>
+        <br>
+        Add a Topping to Pizza:<br><br>
+        Add a Sauce:<br>
+        <select id="addSauce">
+            <option *ngFor="let s of sauces" [attr.value]="s.iiId">
+                {{s.topping.toppingName}} from {{s.location.name}}
+            </option>
+        </select>
+        <select id="sauceToppingSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select> <br>
+        <button id="i1" (click)="onClick2($event)">Add Sauce</button>
+        <br>
+        Add a Cheese: <br>
+        <select id="addCheese">
+            <option *ngFor="let c of cheeses" [attr.value]="c.iiId">
+                {{c.topping.toppingName}} from {{c.location.name}}
+            </option>
+        </select>
+        <select id="cheeseToppingSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select> <br>
+        <button id="i2" (click)="onClick2($event)">Add Cheese</button>
+        <br>
+        Add a Meat: <br>
+        <select id="addMeat">
+            <option *ngFor="let m of meats" [attr.value]="m.iiId">
+                {{m.topping.toppingName}} from {{m.location.name}}
+            </option>
+        </select>
+        <select id="meatToppingSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select> <br>
+        <button id="i3" (click)="onClick2($event)">Add Meat</button>
+        <br>
+        Add a Vegetable: <br>
+        <select id="addVegetable">
+            <option *ngFor="let v of vegetables" [attr.value]="v.iiId">
+                {{v.topping.toppingName}} from {{v.location.name}}
+            </option>
+        </select>  
+        <select id="vegetableToppingSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select> <br>
+        <button id="i4" (click)="onClick2($event)">Add Vegetable</button>
+        <br>
+        Add a Herb: <br>
+        <select id="addHerb">
+            <option *ngFor="let h of herbs" [attr.value]="h.iiId">
+                {{h.topping.toppingName}} from {{h.location.name}}
+            </option>
+        </select> 
+        <select id="herbToppingSize">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select>  <br>
+        <button id="i5" (click)="onClick2($event)">Add Herb</button>
+        <br>
+            
+
+    </form> <br>
+    <button (click)="initialize()">Done Updating</button>
+</div>
+
+
