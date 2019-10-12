@@ -15,6 +15,14 @@ import { StoreOrdersComponent } from './component/store/store-orders/store-order
 import { StoreRoutingModule } from './component/store/store-routing.module';
 import { StoreInventoryComponent } from './component/store/store-inventory/store-inventory.component';
 import { CouponsComponent } from './component/coupons/coupons.component';
+import { MakeOrderComponent } from './component/make-order/make-order.component';
+import { MakeOrderRoutingModule } from './component/make-order/make-order-routing.module';
+import { MakeOrderStoresComponent } from './component/make-order/make-order-stores/make-order-stores.component';
+import { MakeOrderStoreComponent } from './component/make-order/make-order-store/make-order-store.component';
+import { MakeOrderSpecialtyPizzaComponent } from './component/make-order/make-order-specialty-pizza/make-order-specialty-pizza.component';
+import { MakeOrderCurrentOrderComponent } from './component/make-order/make-order-current-order/make-order-current-order.component';
+import { MakeOrderCustomPizzaComponent } from './component/make-order/make-order-custom-pizza/make-order-custom-pizza.component';
+import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make-order-update-custom-pizza/make-order-update-custom-pizza.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +34,14 @@ import { CouponsComponent } from './component/coupons/coupons.component';
     StoreComponent,
     StoreOrdersComponent,
     StoreInventoryComponent,
-    CouponsComponent
+    CouponsComponent,
+    MakeOrderComponent,
+    MakeOrderStoresComponent,
+    MakeOrderStoreComponent,
+    MakeOrderSpecialtyPizzaComponent,
+    MakeOrderCurrentOrderComponent,
+    MakeOrderCustomPizzaComponent,
+    MakeOrderUpdateCustomPizzaComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +49,8 @@ import { CouponsComponent } from './component/coupons/coupons.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    StoreRoutingModule
+    StoreRoutingModule,
+    MakeOrderRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

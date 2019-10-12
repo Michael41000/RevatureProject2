@@ -14,4 +14,8 @@ export class PorderService {
   getPOrdersByStore(storeId: number) : Observable<porder[]> {
     return this.http.get<porder[]>(`${this.globalService.hostName}/porders?store=${storeId}`);
   }
+
+  createPOrder(porder: porder) : Observable<porder> {
+    return this.http.post<porder>(`${this.globalService.hostName}/porders`, porder);
+  }
 }

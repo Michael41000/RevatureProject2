@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { person } from '../model/person';
+import { porder } from '../model/porder';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class GlobalService {
   }
 
   currentPerson: person;
+  currentOrder: porder;
   hostName: string;
   isProduction: boolean = false;
 

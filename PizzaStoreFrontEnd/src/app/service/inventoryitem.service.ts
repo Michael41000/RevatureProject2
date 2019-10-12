@@ -18,4 +18,5 @@ export class InventoryitemService {
   updateInventoryItem(inventoryItem: inventoryItem) : Observable<inventoryItem> {
     return this.http.put<inventoryItem>(`${this.globalService.hostName}/inventoryitems/${inventoryItem.iiId}`, inventoryItem);
   }
+
 }
