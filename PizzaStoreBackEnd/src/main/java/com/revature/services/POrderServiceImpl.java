@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.POrder;
-import com.revature.models.Person;
+import com.revature.models.Pizza;
 import com.revature.repositories.POrderRepository;
 
 @Service
