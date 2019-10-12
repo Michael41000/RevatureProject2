@@ -1,7 +1,5 @@
 <!-- <p>managespecpizza works!</p> -->
 <button (click)="createSpecialtyPizza()" >Create Specialty Pizza</button><br>
-<button (click)="updateSpecialtyPizza()" >Update Specialty Pizza</button><br>
-<button (click)="deleteSpecialtyPizza()" >Delete Specialty Pizza</button><br>
 <div style="display: none" id="init">
     <table>
         <tr>
@@ -57,7 +55,30 @@
     <input id="pizzaId" type="number"> 
     <button (click)="deleteSpecialtyPizzaSubmit()" >Submit</button> -->
 </div>
-<div style="display: none" id="createSP"></div>
+<div style="display: none" id="createSP">
+    Set Size of Pizza:<br>
+    <select id="setSize" [(ngModel)]="setSize">
+        <option value="1">Small</option>
+        <option value="2">Medium</option>
+        <option value="3">Large</option>
+    </select> <br>
+    <br>
+    <button (click)="createSpecialtyPizzaSubmit()">Submit Pizza</button><br>
+    <table>
+        <tr *ngFor="let ii of inventoryItems">
+            <td>{{ii.topping.toppingName}}</td>
+            <td>{{ii.price}}</td> <!-- multiplier? -->
+            <td>{{ii.location.name}}</td>
+            <td>{{ii.topping.calories}}</td>
+            <td>
+                <select [(ngModel)]="selectedPSize" [attr.id]="'S' + ii.iiId">
+                    <option *ngFor="let ps of psizes" [ngValue]="ps">{{ps.psizeName}}</option>
+                </select>
+            </td>
+            <td><button [attr.id]="'c' + ii.iiId" (click)="onClick($event)">Add</button></td>
+        </tr>
+    </table>
+</div>
 <div style="display: none" id="updateSP">
     <!-- <table>
         <tr>

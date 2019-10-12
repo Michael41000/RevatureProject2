@@ -20,9 +20,11 @@ export class ManagespecpizzaComponent implements OnInit {
   pizzaSubscription : Subscription;
   pizzas : pizza[] = [];
   clickedPizzaId : number;
+  clickedIIId : number;
   clickedPizza : pizza;
   i : number = 0;
   newSize : number;
+  setSize : number;
   newTopping : number;
   newIIId : number;
   // newPII : pizzaInventoryItem;
@@ -33,15 +35,52 @@ export class ManagespecpizzaComponent implements OnInit {
   meats : inventoryItem[] = [];
   vegetables : inventoryItem[] = [];
   herbs : inventoryItem[] = [];
+  buttonId: string;
+  selectedPSize : psize;
+  piis : pizzaInventoryItem[] = [];
+  piiMap : Map<string, pizzaInventoryItem> = new Map();
 
   ngOnInit() {
     this.initialize();
     this.getPSizes();
+    this.selectedPSize = this.psizes[0];
     this.getInventoryItems();
   }
 
   createSpecialtyPizza() {
     this.clear();
+    document.getElementById("createSP").style.display = 'block';
+  }
+  createSpecialtyPizzaSubmit(){
+    // console.log(this.piiMap);
+    var values = this.piiMap.values();
+    this.piiMap.forEach((value : pizzaInventoryItem, key : string) => {
+      this.piis.push(value);
+    });
+    var newPizza = new pizza(null, this.psizes[this.setSize - 1], true, this.piis);
+    console.log(newPizza);
+    this.pizzaSubscription = this.pizzaService.createPizza(newPizza)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          // this.initialize();
+        },
+        (response) => {
+          console.log("didnt work");
+        }
+      );
+  }
+  modify(){
+    if (document.getElementById(this.buttonId).innerHTML == 'Add'){
+      // console.log(this.selectedPSize);
+      var newPII = new pizzaInventoryItem(null, this.findIIById(this.clickedIIId), this.selectedPSize);
+      this.piiMap.set(this.buttonId, newPII);
+      document.getElementById(this.buttonId).innerHTML = 'Remove';
+    }
+    else {
+      this.piiMap.delete(this.buttonId);
+      document.getElementById(this.buttonId).innerHTML = 'Add';
+    }
   }
 
   updateSpecialtyPizza() {
@@ -213,13 +252,19 @@ export class ManagespecpizzaComponent implements OnInit {
     var idAttr = event.srcElement.attributes.id;
     var value = idAttr.nodeValue;
     // console.log(value);
-    this.clickedPizzaId = <number> value.substr(1); 
     // console.log(this.clickedPizzaId);
     if (value[0] == 'u'){
+      this.clickedPizzaId = <number> value.substr(1); 
       this.updateSpecialtyPizza();
     }
     else if (value[0] == 'd'){
+      this.clickedPizzaId = <number> value.substr(1); 
       this.deleteSpecialtyPizza();
+    }
+    else if (value[0] == 'c'){
+      this.clickedIIId = <number> value.substr(1);
+      this.buttonId = value;
+      this.modify();
     }
   }
   onClick2(event) {

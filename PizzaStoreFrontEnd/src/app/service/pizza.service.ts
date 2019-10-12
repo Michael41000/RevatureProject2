@@ -30,4 +30,8 @@ export class PizzaService {
     return this.http.get(`${this.globalService.hostName}/inventoryitems`);
 
   }
+
+  createPizza(newPizza : pizza) {
+    return this.http.post(`${this.globalService.hostName}/pizzas`, pizza);
+  }
 }
