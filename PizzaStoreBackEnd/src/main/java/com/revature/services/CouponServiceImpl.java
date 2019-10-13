@@ -42,4 +42,9 @@ public class CouponServiceImpl implements CouponService {
 		return (List<Coupon>) cr.findAll();
 	}
 
+	@Override
+	public List<Coupon> getActiveCoupons() {
+		return cr.findByActiveTrue();
+	}
+
 }

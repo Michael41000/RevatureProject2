@@ -44,7 +44,7 @@ public class Person {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "person_pizza", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
 	private List<Pizza> favorites;
 

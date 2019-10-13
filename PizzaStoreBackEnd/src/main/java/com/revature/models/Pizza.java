@@ -34,7 +34,7 @@ public class Pizza {
 	@Column(name = "is_specialty", nullable = false)
 	private boolean isSpecialty;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "pizza_id")
 	private List<PizzaInventoryItem> inventoryItems;
 

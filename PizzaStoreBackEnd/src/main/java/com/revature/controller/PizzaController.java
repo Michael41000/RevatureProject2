@@ -37,6 +37,7 @@ public class PizzaController {
   
 	@PostMapping(consumes = "application/json")
 	public Pizza createPizza(@RequestBody Pizza pizza) {
+		System.out.println(pizza);
 		return ps.createPizza(pizza);
 	}
 
@@ -47,7 +48,7 @@ public class PizzaController {
 	}
 
 	@DeleteMapping(value = "{id}")
-	public Pizza deletePizza(@PathVariable("id") int id) {
-		return ps.deletePizza(ps.getPizzaById(id));
+	public void deletePizza(@PathVariable("id") int id) {
+		ps.deletePizza(ps.getPizzaById(id));
 	}
 }

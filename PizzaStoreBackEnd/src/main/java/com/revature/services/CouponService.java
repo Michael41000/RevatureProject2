@@ -14,4 +14,6 @@ public interface CouponService {
 	public Coupon updateCoupon(Coupon coupon);
 
 	public Coupon deleteCoupon(Coupon coupon);
+
+	public List<Coupon> getActiveCoupons();
 }
