@@ -13,11 +13,19 @@ public class PersonServiceImpl implements PersonService {
 
 	@Autowired
 	PersonRepository personr;
-	
+	@Autowired
+	RoleService rs;
+
 	@Override
 	public Person createPerson(Person person) {
-		personr.save(person);
-		return person;
+		if (personr.existsByUsername(person.getUsername())) {
+			return null;
+		}
+		else {
+			person.setRole(rs.getRoleByName("Customer"));
+			personr.save(person);
+			return person;
+		}
 	}
 
 	@Override
@@ -27,6 +35,13 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Person updatePerson(Person person) {
+		// If they are changing their username
+		if (!personr.findById(person.getPersonId()).get().getUsername().equals(person.getUsername()))
+		{	// If that username exists already deny it
+			if (personr.existsByUsername(person.getUsername())) {
+				return null;
+			}
+		}
 		personr.save(person);
 		return person;
 	}
@@ -51,6 +66,11 @@ public class PersonServiceImpl implements PersonService {
 		else {
 			System.out.println("username bad");
 		}
+	}
+
+	@Override
+	public Person loginPerson(Person person) {
+		return personr.findByUsernameAndPassword(person.getUsername(), person.getPassword());
 	}
 
 }

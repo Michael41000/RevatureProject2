@@ -45,9 +45,13 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 	}
 
 	@Override
+	public List<InventoryItem> getInventoryItemsByStoreId(int storeId) {
+		return iir.findByStoreStoreId(storeId);
+	}
+
+	@Override
 	public List<InventoryItem> getInventoryItemsByStoreStoreId(int storeId) {
-		// TODO Auto-generated method stub
-		return iir.findAllByStoreStoreId(storeId);
+		return iir.findByStoreStoreId(storeId);
 	}
 
 }

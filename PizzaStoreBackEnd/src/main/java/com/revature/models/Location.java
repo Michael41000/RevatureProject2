@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Location {
 	@Id
 	@Column(name = "l_id")
-	@SequenceGenerator(sequenceName = "location_id_maker", name = "l_seq")
+	@SequenceGenerator(sequenceName = "location_id_maker", name = "l_seq", allocationSize = 1)
 	@GeneratedValue(generator = "l_seq", strategy = GenerationType.SEQUENCE)
 	private int locationId;
 
@@ -23,6 +23,18 @@ public class Location {
 	@Column(name = "longitude")
 	private double longitude;
 
+	@Column(name = "street_address")
+	private String streetAddress;
+
+	@Column(name = "city")
+	private String city;
+
+	@Column(name = "state")
+	private String state;
+
+	@Column(name = "zipcode")
+	private int zipcode;
+
 	@Column(name = "name")
 	private String name;
 
@@ -30,18 +42,28 @@ public class Location {
 		super();
 	}
 
-	public Location(double latitude, double longitude, String name) {
+	public Location(double latitude, double longitude, String streetAddress, String city, String state, int zipcode,
+			String name) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
 		this.name = name;
 	}
 
-	public Location(int locationId, double latitude, double longitude, String name) {
+	public Location(int locationId, double latitude, double longitude, String streetAddress, String city, String state,
+			int zipcode, String name) {
 		super();
 		this.locationId = locationId;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
 		this.name = name;
 	}
 
@@ -69,6 +91,38 @@ public class Location {
 		this.longitude = longitude;
 	}
 
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -79,8 +133,9 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [locationId=" + locationId + ", latitude=" + latitude + ", longitude=" + longitude + ", name="
-				+ name + "]";
+		return "Location [locationId=" + locationId + ", latitude=" + latitude + ", longitude=" + longitude +
+				", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode +
+				", name=" + name + "]";
 	}
 
 }

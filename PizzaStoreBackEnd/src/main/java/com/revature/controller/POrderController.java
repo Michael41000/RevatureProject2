@@ -35,6 +35,11 @@ public class POrderController {
 	public List<POrder> getPOrder() {
 		return pos.findAllPOrders();
 	}
+	
+	@GetMapping(params = "store")
+	public List<POrder> getPOrdersByStore(@RequestParam("store") int storeId) {
+		return pos.getPOrdersByStore(storeId);
+	}
 
 
 	@GetMapping(params = "storeId")
@@ -48,9 +53,10 @@ public class POrderController {
 	public List<POrder> showPOrders(@RequestParam("personId") int personId){
 		return pos.customerViewOrders(personId);
 	}
-	
+  
 	@PostMapping(consumes = "application/json")
 	public POrder createPOrder(@RequestBody POrder porder) {
+		System.out.println(porder);
 		return pos.createPOrder(porder);
 	}
 

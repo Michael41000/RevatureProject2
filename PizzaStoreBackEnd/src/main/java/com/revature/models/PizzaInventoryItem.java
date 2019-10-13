@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ public class PizzaInventoryItem {
 
 	@Id
 	@Column(name = "pii_id")
-	@SequenceGenerator(sequenceName = "pii_id_maker", name = "pii_seq")
+	@SequenceGenerator(sequenceName = "pii_id_maker", name = "pii_seq", allocationSize = 1)
 	@GeneratedValue(generator = "pii_seq", strategy = GenerationType.SEQUENCE)
 	private int piiId;
 
@@ -64,7 +65,7 @@ public class PizzaInventoryItem {
 	public PSize getAmount() {
 		return amount;
 	}
-	
+  
 	public void setAmount(PSize amount) {
 		this.amount = amount;
 	}

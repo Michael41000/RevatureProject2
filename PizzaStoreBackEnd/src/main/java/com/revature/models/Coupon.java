@@ -8,12 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "coupon")
 public class Coupon {
 	@Id
 	@Column(name = "c_id")
-	@SequenceGenerator(sequenceName = "coupon_id_maker", name = "c_seq")
+	@SequenceGenerator(sequenceName = "coupon_id_maker", name = "c_seq", allocationSize = 1)
 	@GeneratedValue(generator = "c_seq", strategy = GenerationType.SEQUENCE)
 	private int couponId;
 	
@@ -25,24 +27,30 @@ public class Coupon {
 	
 	@Column(name="description")
 	private String description;
+	
+	@Type(type = "true_false")
+	@Column(name = "active", nullable = false)
+	private boolean active;
 
 	public Coupon() {
 		super();
 	}
 
-	public Coupon(int couponId, double discountPercent, double code, String description) {
+	public Coupon(double discountPercent, double code, String description, boolean active) {
+		super();
+		this.discountPercent = discountPercent;
+		this.code = code;
+		this.description = description;
+		this.active = active;
+	}
+
+	public Coupon(int couponId, double discountPercent, double code, String description, boolean active) {
 		super();
 		this.couponId = couponId;
 		this.discountPercent = discountPercent;
 		this.code = code;
 		this.description = description;
-	}
-
-	public Coupon(double discountPercent, double code, String description) {
-		super();
-		this.discountPercent = discountPercent;
-		this.code = code;
-		this.description = description;
+		this.active = active;
 	}
 
 	public int getCouponId() {
@@ -77,10 +85,20 @@ public class Coupon {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Coupon [couponId=" + couponId + ", discountPercent=" + discountPercent + ", code=" + code
-				+ ", description=" + description + "]";
+	public boolean isActive() {
+		return active;
 	}
 
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "Coupon [couponId=" + couponId + ", discountPercent=" + discountPercent + ", code=" + code +
+				", description=" + description + ", active=" + active + "]";
+	}
+
+
+	
 }

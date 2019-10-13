@@ -35,6 +35,11 @@ public class InventoryItemController {
 	public List<InventoryItem> getInventoryItems() {
 		return iis.getAllInventoryItems();
 	}
+	
+	@GetMapping(params = "store")
+	public List<InventoryItem> getInventoryItemsByStore(@RequestParam("store") int storeId) {
+		return iis.getInventoryItemsByStoreId(storeId);
+	}
 
 	@PostMapping(consumes = "application/json")
 	public InventoryItem createInvenoryItem(@RequestBody InventoryItem inventoryitem) {

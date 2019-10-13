@@ -1,18 +1,17 @@
 package com.revature.models;
 
+import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,7 +22,7 @@ import org.hibernate.annotations.Type;
 public class Pizza {
 	@Id
 	@Column(name = "p_id")
-	@SequenceGenerator(sequenceName = "pizza_id_maker", name = "p_seq")
+	@SequenceGenerator(sequenceName = "pizza_id_maker", name = "p_seq", allocationSize = 1)
 	@GeneratedValue(generator = "p_seq", strategy = GenerationType.SEQUENCE)
 	private int pizzaId;
 
@@ -35,27 +34,27 @@ public class Pizza {
 	@Column(name = "is_specialty", nullable = false)
 	private boolean isSpecialty;
 
-	@ManyToMany
-	@JoinTable(name = "pizza_inventory_item", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "amount"))
-	@MapKeyColumn(name = "ii_id")
-	private Map<InventoryItem, PSize> inventoryItems;
-	
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "pizza_id")
+	private List<PizzaInventoryItem> inventoryItems;
 
 	public Pizza() {
 		super();
 	}
 
-	public Pizza(PSize psize, boolean isSpecialty) {
+	public Pizza(PSize psize, boolean isSpecialty, List<PizzaInventoryItem> inventoryItems) {
 		super();
 		this.psize = psize;
 		this.isSpecialty = isSpecialty;
+		this.inventoryItems = inventoryItems;
 	}
 
-	public Pizza(int pizzaId, PSize psize, boolean isSpecialty) {
+	public Pizza(int pizzaId, PSize psize, boolean isSpecialty, List<PizzaInventoryItem> inventoryItems) {
 		super();
 		this.pizzaId = pizzaId;
 		this.psize = psize;
 		this.isSpecialty = isSpecialty;
+		this.inventoryItems = inventoryItems;
 	}
 
 	public int getPizzaId() {
@@ -82,9 +81,18 @@ public class Pizza {
 		this.isSpecialty = isSpecialty;
 	}
 
+	public List<PizzaInventoryItem> getInventoryItems() {
+		return inventoryItems;
+	}
+
+	public void setInventoryItems(List<PizzaInventoryItem> inventoryItems) {
+		this.inventoryItems = inventoryItems;
+	}
+
 	@Override
 	public String toString() {
-		return "Pizza [pizzaId=" + pizzaId + ", psize=" + psize + ", isSpecialty=" + isSpecialty + "]";
+		return "Pizza [pizzaId=" + pizzaId + ", psize=" + psize + ", isSpecialty=" + isSpecialty + ", inventoryItems=" +
+				inventoryItems + "]";
 	}
 
 }

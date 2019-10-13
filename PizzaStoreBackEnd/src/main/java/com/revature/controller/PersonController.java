@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,24 +33,40 @@ public class PersonController {
 
 	@GetMapping
 	public List<Person> getPersons() {
-		ps.testCheckUsername("he");
 		return ps.getAllPerson();
 	}
 
 	@PostMapping(consumes = "application/json")
-	public Person createPerson(@RequestBody Person person) {
-		return ps.createPerson(person);
+	public Person createPerson(@RequestBody Person person, HttpServletResponse response) {
+		Person createPerson = ps.createPerson(person);
+		if (createPerson == null) {
+			response.setStatus(409);
+		}
+		return createPerson;
+	}
+	
+	@PostMapping(value = "login", consumes = "application/json")
+	public Person loginPerson(@RequestBody Person person, HttpServletResponse response) {
+		Person loginPerson = ps.loginPerson(person);
+		if (loginPerson == null) {
+			response.setStatus(422);
+		}
+		return loginPerson;
+		
 	}
 
 	@PutMapping(value = "{id}", consumes = "application/json")
-	public Person updatePerson(@PathVariable("id") int id, @RequestBody Person person) {
+	public Person updatePerson(@PathVariable("id") int id, @RequestBody Person person, HttpServletResponse response) {
 		person.setPersonId(id);
-		return ps.updatePerson(person);
+		Person updatePerson = ps.updatePerson(person);
+		if (updatePerson == null) {
+			response.setStatus(409);
+		}
+		return updatePerson;
 	}
 
 	@DeleteMapping(value = "{id}")
 	public Person deletePerson(@PathVariable("id") int id) {
 		return ps.deletePerson(ps.getPersonById(id));
 	}
-	
 }

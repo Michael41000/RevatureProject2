@@ -2,9 +2,9 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class Person {
 	@Id
-	@SequenceGenerator(sequenceName = "person_id_maker", name = "p_seq")
+	@SequenceGenerator(sequenceName = "person_id_maker", name = "p_seq",allocationSize=1)
 	@GeneratedValue(generator = "p_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "person_id")
 	private int personId;
@@ -37,7 +36,7 @@ public class Person {
 	@Column(name = "password")
 	private String password;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "location_id")
 	private Location location;
 
@@ -45,7 +44,7 @@ public class Person {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "person_pizza", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
 	private List<Pizza> favorites;
 

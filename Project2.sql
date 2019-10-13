@@ -347,9 +347,8 @@ select * from pizza;
 
 select * from role;
 select * from location;
-select * from porder;
 select * from person;
-INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 'T');
 
 --select * from role;
 --select * from location;
@@ -509,4 +508,6 @@ commit;
 --ORDEr BY ii.i_id;
 
 SELECT * FROM person;
+
+SELECT DISTINCT name, i_id, topping_id, amount_left, price, location_id, store_id, t_id, calories, type_id FROM Inventory_Item i JOIN Topping t ON i.topping_id = t.t_id;
 

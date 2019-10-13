@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Topping {
 	@Id
 	@Column(name = "t_id")
-	@SequenceGenerator(sequenceName = "topping_id_maker", name = "topping_seq")
+	@SequenceGenerator(sequenceName = "topping_id_maker", name = "topping_seq", allocationSize = 1)
 	@GeneratedValue(generator = "topping_seq", strategy = GenerationType.SEQUENCE)
 	private int toppingId;
 

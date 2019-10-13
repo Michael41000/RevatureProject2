@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "topping_type")
 public class ToppingType {
 	@Id
-	@SequenceGenerator(sequenceName = "tt_id_maker", name = "tt_seq")
+	@SequenceGenerator(sequenceName = "tt_id_maker", name = "tt_seq", allocationSize = 1)
 	@GeneratedValue(generator = "tt_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "tt_id")
 	private int ttId;
