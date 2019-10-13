@@ -23,6 +23,10 @@ CREATE TABLE location(
     l_id NUMBER (10) PRIMARY KEY,
     latitude NUMBER (10, 6),
     longitude NUMBER (10, 6),
+    street_address VARCHAR2(100),
+    city VARCHAR2(100),
+    state VARCHAR2(100),
+    zipcode NUMBER(5),
     name VARCHAR2 (200)    
 );
 
@@ -53,6 +57,7 @@ CREATE TABLE pizza(
     is_specialty VARCHAR2(1)
 );
 
+
 CREATE TABLE psize(
     ps_id NUMBER (10) PRIMARY KEY,
     psize_name VARCHAR2 (100),
@@ -60,6 +65,7 @@ CREATE TABLE psize(
 );
 
 CREATE TABLE pizza_inventory_item(
+    pii_id NUMBER(10) PRIMARY KEY,
     pizza_id NUMBER (10),                       -- JOIN TABLE does not have primary key, Many to Many Relationship
     ii_id NUMBER (10),
     amount NUMBER(10)
@@ -69,7 +75,7 @@ CREATE TABLE person(
     person_id NUMBER (10) PRIMARY KEY,
     first_name VARCHAR2(100),
     last_name VARCHAR2 (100),
-    username VARCHAR2 (100),
+    username VARCHAR2 (100) UNIQUE,
     password VARCHAR2 (100),
     location_id NUMBER (10),
     role_id NUMBER (10)
@@ -94,6 +100,7 @@ CREATE TABLE porder(
     coupon_id NUMBER (10)
 );
 
+
 CREATE TABLE porder_pizza(
     porder_id NUMBER (10),
     pizza_id NUMBER (10)
@@ -103,7 +110,8 @@ CREATE TABLE coupon(
     c_id NUMBER (10) PRIMARY KEY,
     discount_percent NUMBER (10, 2),
     code NUMBER (10),
-    description VARCHAR2 (500)
+    description VARCHAR2 (500),
+    active VARCHAR2(1)
 );
 
 ALTER TABLE store ADD CONSTRAINT fk_store_location FOREIGN KEY (location_id) REFERENCES location(l_id) ON DELETE CASCADE;
@@ -137,6 +145,8 @@ DROP SEQUENCE topping_id_maker;
 DROP SEQUENCE pizza_id_maker;
 /
 DROP SEQUENCE psize_id_maker;
+/
+DROP SEQUENCE pii_id_maker;
 /
 DROP SEQUENCE person_id_maker;
 /
@@ -184,6 +194,12 @@ CREATE SEQUENCE psize_id_maker
     START WITH 1
     INCREMENT BY 1;
     /
+    
+CREATE SEQUENCE pii_id_maker
+    MINVALUE 1
+    START WITH 1
+    INCREMENT BY 1;
+    /
 
 CREATE SEQUENCE person_id_maker
     MINVALUE 1
@@ -218,12 +234,12 @@ CREATE SEQUENCE tt_id_maker
 INSERT INTO role VALUES(role_id_maker.nextval, 'Customer');
 INSERT INTO role VALUES(role_id_maker.nextval, 'Employee');
 
-INSERT INTO location VALUES(location_id_maker.nextval, 39.656755, -79.9283087, 'West Run Apartments');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6318875, -79.9559044, 'Pizza Store #1');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6266512, -79.9600794, 'Pizza Store #2');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.650808, -79.943543, 'Kroger');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6608103, -79.9309657, 'Animal Farm');
-INSERT INTO location VALUES(location_id_maker.nextval, 39.6465469, -79.9385532, 'Organic Farm');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.656755, -79.9283087, '500 Koehler Dr', 'Morgantown', 'West Virginia', 26508, 'West Run Apartments');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6273613, -79.9637484, '54 Clay St', 'Morgantown', 'West Virginia', 26501, 'Pizza Store #1');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6263481, -79.9576029, '300 Pleasant St', 'Morgantown', 'West Virginia', 26501,'Pizza Store #2');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6264131, -79.9904338, '500 Suncrest Towne Centre Drive', 'Morgantown', 'West Virginia', 26505, 'Kroger'); 
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6578539, -79.934223, null, 'Morgantown', 'West Virginia', 26505, 'Animal Farm');
+INSERT INTO location VALUES(location_id_maker.nextval, 39.6449645, -79.9430651, 'WV-705', 'Morgantown', 'West Virginia', 26505, 'Organic Farm');
 
 INSERT INTO psize VALUES(psize_id_maker.nextval, 'Small', 1);
 INSERT INTO psize VALUES(psize_id_maker.nextval, 'Medium', 2);
@@ -232,7 +248,7 @@ INSERT INTO psize VALUES(psize_id_maker.nextval, 'Large', 3);
 INSERT INTO store VALUES(store_id_maker.nextval, 2);
 INSERT INTO store VALUES(store_id_maker.nextval, 3);
 
-INSERT INTO person VALUES(person_id_maker.nextval, 'Head', 'Employee', 'he', 'password', 1, 2);
+INSERT INTO person VALUES(person_id_maker.nextval, 'Head', 'Employee', 'he', 'pass', 1, 2);
 
 INSERT INTO topping_type VALUES(tt_id_maker.nextval, 'Sauce');
 INSERT INTO topping_type VALUES(tt_id_maker.nextval, 'Cheese');
@@ -308,15 +324,20 @@ INSERT INTO topping VALUES(topping_id_maker.nextval, 'Coriander', 23, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Paprika', 19, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Black Pepper', 17, 5);
 
-insert into coupon values (coupon_id_maker.nextval, 10, 55, '???');
+insert into coupon values (coupon_id_maker.nextval, 10, 55, '???', 'T');
 INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 1, 1);  -- test
 
 
-insert into porder values (porder_id_maker.nextval, 1, 1, 15, null, 1);
-insert into porder values (porder_id_maker.nextval, 2, 1, 15, null, 1);
+insert into porder values (porder_id_maker.nextval, 1, 1, 15, TO_DATE('2019/10/11 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), 1);
+insert into porder values (porder_id_maker.nextval, 2, 1, 15, TO_DATE('2019/10/11 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), 1);
+INSERT INTO porder VALUES(porder_id_maker.nextval, 1, 2, 15, TO_DATE('2019/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), null);
+
+
+
 --select * from person;
 --select * from porder;
 commit;
+select * from pizza;
 --select * from porder;
 --insert into role values(role_id_maker.nextval, 'Customer');
 
@@ -324,12 +345,16 @@ commit;
 --
 --INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 1, 1);  -- test
 
-INSERT INTO pizza VALUES(pizza_id_maker.nextval, 2, 'T');
+select * from role;
+select * from location;
+select * from porder;
+select * from person;
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
 
 --select * from role;
 --select * from location;
 --select * from person;
-select * from pizza;
+--select * from pizza;
 
 CREATE OR REPLACE PROCEDURE add_inventory_to_store(store_id IN NUMBER) 
 IS
@@ -362,6 +387,111 @@ END;
 CALL add_inventory_to_store(1);
 -- Fill inventory of Store 2
 CALL add_inventory_to_store(2);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 57, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 3, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 32, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 46, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 12, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 2, 21, 1);
+
+
+
+INSERT INTO porder_pizza VALUES (1, 2);
+INSERT INTO porder_pizza VALUES(1, 1);
+--INSERT INTO porder_pizza VALUES(1, 3);
+--INSERT INTO porder_pizza VALUES(4, 2);
+
+
+
+-- A Speciality pizza
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 6, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 23, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 33, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 52, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 62, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 3, 58, 1);
+
+
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 3, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 6, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 23, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 33, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 52, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 62, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 1, 58, 1);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'T');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 4, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 5, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 15, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 22, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 26, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 34, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 54, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 4, 61, 1);
+
+insert into porder_pizza values(2, 3);
+insert into porder_pizza values(2, 4);
+insert into porder_pizza values(3, 1);
+insert into porder_pizza values(3, 3);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'F');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 3, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 6, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 23, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 33, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 52, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 62, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 5, 58, 1);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'F');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 57, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 3, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 32, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 46, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 12, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 6, 21, 1);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'F');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 2, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 6, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 23, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 33, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 52, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 62, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 7, 58, 1);
+
+INSERT INTO pizza VALUES(pizza_id_maker.nextval, 1, 'F');
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 4, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 5, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 15, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 22, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 26, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 34, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 54, 1);
+INSERT INTO pizza_inventory_item VALUES(pii_id_maker.nextval, 8, 61, 1);
+
+
+
+
+
+
+insert into person_pizza values(1, 5);
+insert into person_pizza values(1, 7);
+insert into person_pizza values(2, 6);
+insert into person_pizza values(2, 8);
+
+
+
+
+
+
 
 commit;
 
