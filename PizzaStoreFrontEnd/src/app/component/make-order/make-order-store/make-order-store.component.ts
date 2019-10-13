@@ -56,6 +56,15 @@ export class MakeOrderStoreComponent implements OnInit {
         }
       });
     }
+    else if(pizzaOption === "favoritePizza") {
+      this.router.navigate([`makeOrder/store/${this.store.storeId}/favoritePizza`]).then((e) => {
+        if (e) {
+          console.log("Navigation is successful!");
+        } else {
+          console.log("Navigation has failed!");
+        }
+      });
+    }
   }
 
   ngOnDestory() {

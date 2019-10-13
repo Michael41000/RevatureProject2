@@ -1,0 +1,40 @@
+<table class="table">
+
+
+    <ng-container *ngFor="let pizza of pizzas; let i = index">
+        <tr>
+            <th>Id</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Calories</th>
+        </tr>
+        <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{pizza.psize.psizeName }}</td>
+            <td>{{ calculatePizzaPrice(pizza) | currency: 'USD' }}</td>
+            <td>{{ calculateCalories(pizza) }}</td>
+            <td><button (click)="addToOrder(pizza)">Add To Order</button></td>
+        </tr>
+        <tr>
+            <th>Topping</th>
+            <th>Name</th>
+            <th>Calories</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+        <ng-container *ngFor="let j of pizza.inventoryItems">
+
+            <tr>
+                <td></td>
+                <td>{{ j.inventoryItem.topping.toppingName }}</td>
+                <td>{{ j.inventoryItem.topping.calories }}</td>
+                <td>{{ j.inventoryItem.location.name }}</td>
+                <td>{{ (j.inventoryItem.price * j.amount.multiplier) | currency: 'USD' }}</td>
+                <td>{{ j.amount.psizeName }}</td>
+            </tr>
+        </ng-container>
+
+    </ng-container>
+
+</table>
