@@ -1,12 +1,40 @@
 <table class="table table-striped">
     <tr>
-        <th>Id</th>
-        <th>Person Ordered</th>
-        <th>Time Ordered</th>
+        <th>Store</th>
+        <th>Date Order</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
-    <tr *ngFor="let order of orders">
-        <td>{{ order.porderId }}</td>
-        <td>{{ order.person.firstName }} {{ order.person.lastName }}</td>
-        <td>{{ order.timeOrdered }}</td>
-    </tr>
+    <ng-container *ngFor="let porder of orders; let j = index">
+        <tr>
+            <td>{{porder.store.location.name}}</td>
+            <td>{{porder.timeOrdered | date: 'short'}}</td>
+            <td></td>
+            <td *ngIf="porder.visible === undefined"><button (click)="show(porder)">show</button></td>
+            <td *ngIf="porder.visible"><button (click)="hide(porder)">hide</button></td>
+        </tr>
+        <ng-container *ngIf="porder.visible">
+            <tr>
+                <th>Pizza</th>
+                <th>Size</th>
+                <th>Total Calories</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            <ng-container *ngFor="let pizza of porder.pizzasInOrder; let i = index">
+                <tbody app-pizza [props]="{pizza: pizza, index: i, pizzaArrayLength: porder.pizzasInOrder.length}">
+                </tbody>
+            </ng-container>
+            <tr *ngIf="j !== orders.length - 1">
+                <th>Store</th>
+                <th>Date Order</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-container>
+
+    </ng-container>
+
 </table>

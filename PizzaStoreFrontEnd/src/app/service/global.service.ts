@@ -19,7 +19,7 @@ export class GlobalService {
   currentPerson: person;
   currentOrder: porder;
   hostName: string;
-  isProduction: boolean = false;
+  isProduction: boolean = true;
 
   
 }

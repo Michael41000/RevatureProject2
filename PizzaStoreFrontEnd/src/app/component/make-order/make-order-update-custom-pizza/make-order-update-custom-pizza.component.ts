@@ -185,7 +185,6 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
 
   calculateInventoryItemPrice(inventoryItem: any, psizeIndex: number) {
     console.log(psizeIndex);
-    inventoryItem.psizeSelected = psizeIndex;
     if (this.psizes[psizeIndex] !== undefined) {
       return inventoryItem.price * this.psizes[psizeIndex].multiplier;
     }
