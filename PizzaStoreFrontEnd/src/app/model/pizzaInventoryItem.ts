@@ -6,7 +6,6 @@ export class pizzaInventoryItem {
     inventoryItem: inventoryItem;
     amount: psize;
 
-
     constructor(piiId: number, inventoryItem: inventoryItem, amount: psize) {
         this.piiId = piiId;
         this.inventoryItem = inventoryItem;

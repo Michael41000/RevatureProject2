@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { store } from 'src/app/model/store';
 import { GlobalService } from 'src/app/service/global.service';
 import { porder } from 'src/app/model/porder';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-make-order-stores',
@@ -19,9 +20,10 @@ export class MakeOrderStoresComponent implements OnInit {
   }
 
   stores: store[] = [];
+  subs: Subscription = new Subscription();
 
   displayAllStores() {
-    this.storeService.getAllStores().subscribe(
+    this.subs.add(this.storeService.getAllStores().subscribe(
       (response) => {
         console.log(response);
         this.stores = response;
@@ -30,7 +32,7 @@ export class MakeOrderStoresComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ));
   }
 
   goToStore(store: store) {

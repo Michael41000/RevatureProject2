@@ -3,6 +3,8 @@ import { GlobalService } from 'src/app/service/global.service';
 import { pizza } from 'src/app/model/pizza';
 import { Router } from '@angular/router';
 import { PorderService } from 'src/app/service/porder.service';
+import { Subscription } from 'rxjs';
+import { PersonService } from 'src/app/service/person.service';
 
 @Component({
   selector: 'app-make-order-current-order',
@@ -12,12 +14,15 @@ import { PorderService } from 'src/app/service/porder.service';
 export class MakeOrderCurrentOrderComponent implements OnInit {
 
   constructor(private globalService: GlobalService,
-     private router: Router,
-     private porderService: PorderService) { }
+    private router: Router,
+    private porderService: PorderService,
+    private personService: PersonService) { }
 
   ngOnInit() {
     console.log(this.globalService.currentOrder);
   }
+
+  subs: Subscription = new Subscription();
 
   calculatePizzaPrice(pizza: pizza) {
     console.log("Calculating" + pizza.pizzaId);
@@ -29,6 +34,10 @@ export class MakeOrderCurrentOrderComponent implements OnInit {
     }
 
     basePrice *= pizza.psize.multiplier;
+
+    if (this.globalService.currentOrder.coupon) {
+      basePrice *= (1 - (this.globalService.currentOrder.coupon.discountPercent / 100));
+    }
 
     return basePrice;
   }
@@ -71,7 +80,7 @@ export class MakeOrderCurrentOrderComponent implements OnInit {
 
     console.log(this.globalService.currentOrder);
 
-    this.porderService.createPOrder(this.globalService.currentOrder).subscribe(
+    this.subs.add(this.porderService.createPOrder(this.globalService.currentOrder).subscribe(
       (response) => {
         console.log(response)
         this.globalService.currentOrder = undefined;
@@ -83,7 +92,7 @@ export class MakeOrderCurrentOrderComponent implements OnInit {
           }
         });
       }
-    )
+    ));
   }
 
   cancelOrder() {
@@ -109,6 +118,33 @@ export class MakeOrderCurrentOrderComponent implements OnInit {
         console.log("Navigation has failed!");
       }
     });
+  }
+
+  addCoupon() {
+    this.router.navigate([`makeOrder/coupons`]).then((e) => {
+      if (e) {
+        console.log("Navigation is successful!");
+      } else {
+        console.log("Navigation has failed!");
+      }
+    });
+  }
+
+  deleteCoupon() {
+    this.globalService.currentOrder.coupon = null;
+  }
+
+  addToFavourites(pizzaIndex: number) {
+    this.globalService.currentPerson.favorites.push(this.globalService.currentOrder.pizzasInOrder[pizzaIndex]);
+    this.subs.add(this.personService.updatePerson(this.globalService.currentPerson).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    ))
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

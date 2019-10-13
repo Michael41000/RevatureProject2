@@ -14,4 +14,20 @@ export class PizzaService {
   getSpecialtyPizzas(): Observable<pizza[]> {
     return this.http.get<pizza[]>(`${this.globalService.hostName}/pizzas`)
   }
+
+  removeSpecialtyPizza(pizza: pizza) : Observable<pizza[]> {
+    return this.http.delete<pizza[]>(`${this.globalService.hostName}/pizzas/${pizza.pizzaId}`)
+  }
+
+  addPizza(pizza: pizza) : Observable<pizza> {
+    return this.http.post<pizza>(`${this.globalService.hostName}/pizzas`, pizza);
+  }
+
+  getPizza(pizzaId: number) : Observable<pizza> {
+    return this.http.get<pizza>(`${this.globalService.hostName}/pizzas/${pizzaId}`);
+  }
+
+  updatePizza(pizza: pizza) : Observable<pizza> {
+    return this.http.put<pizza>(`${this.globalService.hostName}/pizzas/${pizza.pizzaId}`, pizza)
+  }
 }

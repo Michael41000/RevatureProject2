@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -23,6 +22,19 @@ import { MakeOrderSpecialtyPizzaComponent } from './component/make-order/make-or
 import { MakeOrderCurrentOrderComponent } from './component/make-order/make-order-current-order/make-order-current-order.component';
 import { MakeOrderCustomPizzaComponent } from './component/make-order/make-order-custom-pizza/make-order-custom-pizza.component';
 import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make-order-update-custom-pizza/make-order-update-custom-pizza.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
+import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
+import { PizzaComponent } from './component/pizza/pizza.component';
+import { ManageSpecialtyPizzaComponent } from './component/manage-specialty-pizza/manage-specialty-pizza.component';
+import { AddPizzaComponent } from './component/manage-specialty-pizza/add-pizza/add-pizza.component';
+import { ListPizzasComponent } from './component/manage-specialty-pizza/list-pizzas/list-pizzas.component';
+import { ManageSpecialtyPizzaRoutingModule } from './component/manage-specialty-pizza/manage-specialty-pizza-routing.module';
+import { EditPizzaComponent } from './component/manage-specialty-pizza/edit-pizza/edit-pizza.component';
+import { AddCouponComponent } from './component/make-order/add-coupon/add-coupon.component';
+import { FavoritesComponent } from './component/favorites/favorites.component';
+import { FavoritesRoutingModule } from './component/favorites/favorites-routing.module';
+import { ListFavoritesComponent } from './component/favorites/list-favorites/list-favorites.component';
+import { EditFavoritesComponent } from './component/favorites/edit-favorites/edit-favorites.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +53,18 @@ import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make
     MakeOrderSpecialtyPizzaComponent,
     MakeOrderCurrentOrderComponent,
     MakeOrderCustomPizzaComponent,
-    MakeOrderUpdateCustomPizzaComponent
+    MakeOrderUpdateCustomPizzaComponent,
+    HomepageComponent,
+    OrderhistoryComponent,
+    PizzaComponent,
+    ManageSpecialtyPizzaComponent,
+    AddPizzaComponent,
+    ListPizzasComponent,
+    EditPizzaComponent,
+    AddCouponComponent,
+    FavoritesComponent,
+    ListFavoritesComponent,
+    EditFavoritesComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +73,9 @@ import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make
     FormsModule,
     NgbModule,
     StoreRoutingModule,
-    MakeOrderRoutingModule
+    MakeOrderRoutingModule,
+    ManageSpecialtyPizzaRoutingModule,
+    FavoritesRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

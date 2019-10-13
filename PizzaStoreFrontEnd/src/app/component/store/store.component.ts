@@ -18,11 +18,11 @@ export class StoreComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.paramSub = this.route.params.subscribe(params => {
+    this.subs.add(this.route.params.subscribe(params => {
       this.storeId = +params["id"];
-    });
+    }));
 
-    this.storeSub = this.storeService.getStore(this.storeId).subscribe(
+    this.subs.add(this.storeService.getStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.store = response;
@@ -30,13 +30,13 @@ export class StoreComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ));
   }
 
   storeId: number;
   store: store;
-  paramSub: Subscription;
-  storeSub: Subscription;
+
+  subs: Subscription = new Subscription();
 
   showOrders() {
     this.router.navigate([`store/${this.store.storeId}/orders`]).then((e) => {
@@ -59,9 +59,8 @@ export class StoreComponent implements OnInit {
 
   }
 
-  ngOnDestroy() {
-    this.paramSub.unsubscribe();
-    this.storeSub.unsubscribe();
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

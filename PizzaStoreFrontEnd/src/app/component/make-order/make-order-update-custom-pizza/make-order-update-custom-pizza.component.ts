@@ -9,6 +9,7 @@ import { toppingtype } from 'src/app/model/toppingtype';
 import { inventoryItem } from 'src/app/model/inventoryItem';
 import { pizzaInventoryItem } from 'src/app/model/pizzaInventoryItem';
 import { pizza } from 'src/app/model/pizza';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-make-order-update-custom-pizza',
@@ -50,8 +51,10 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
 
   storeId: number;
 
+  subs: Subscription = new Subscription();
+
   getSizes() {
-    this.psizeService.getPSizes().subscribe(
+    this.subs.add(this.psizeService.getPSizes().subscribe(
       (response) => {
         console.log(response);
         this.psizes = response;
@@ -62,11 +65,11 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
         }
 
       }
-    )
+    ));
   }
 
   getInventoryItemsByStore() {
-    this.inventoryItemService.getInventoryItemsByStore(this.storeId).subscribe(
+    this.subs.add(this.inventoryItemService.getInventoryItemsByStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.allInventoryItems = response;
@@ -98,7 +101,7 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
 
 
       }
-    )
+    ));
   }
 
   showInventoryItemsByTopping(toppingtype: any) {
@@ -112,13 +115,13 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
   }
 
   getToppingTypes() {
-    this.toppingtypeService.getToppingTypes().subscribe(
+    this.subs.add(this.toppingtypeService.getToppingTypes().subscribe(
       (response) => {
         console.log(response);
         this.toppingtypes = response;
         this.getInventoryItemsByStore();
       }
-    )
+    ));
   }
 
   addToPizza(inventoryItemPassed: any, psizeIndex: number) {
@@ -178,6 +181,18 @@ export class MakeOrderUpdateCustomPizzaComponent implements OnInit {
     }
 
     return baseCalories;
+  }
+
+  calculateInventoryItemPrice(inventoryItem: any, psizeIndex: number) {
+    console.log(psizeIndex);
+    inventoryItem.psizeSelected = psizeIndex;
+    if (this.psizes[psizeIndex] !== undefined) {
+      return inventoryItem.price * this.psizes[psizeIndex].multiplier;
+    }
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

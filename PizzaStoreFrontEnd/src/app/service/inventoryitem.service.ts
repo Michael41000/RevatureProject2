@@ -19,4 +19,7 @@ export class InventoryitemService {
     return this.http.put<inventoryItem>(`${this.globalService.hostName}/inventoryitems/${inventoryItem.iiId}`, inventoryItem);
   }
 
+  getInventoryItems() : Observable<inventoryItem[]>{
+    return this.http.get<inventoryItem[]>(`${this.globalService.hostName}/inventoryitems`);
+  }
 }

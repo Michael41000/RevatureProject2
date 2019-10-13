@@ -35,8 +35,8 @@
                 <td> {{inventoryItem.topping.toppingName }}</td>
                 <td> {{inventoryItem.topping.calories }}</td>
                 <td> {{inventoryItem.location.name }}</td>
-                <td> {{inventoryItem.price | currency : 'USD'}}</td>
-                <td><select #selectedAmount [ngModel]="inventoryItem.psizeSelected">
+                <td> {{calculateInventoryItemPrice(inventoryItem, selectedAmount.value) | currency : 'USD'}}</td>
+                <td><select #selectedAmount [ngModel]="inventoryItem.psizeSelected" (change)="calculateInventoryItemPrice(inventoryItem, selectedAmount.value)">
                         <ng-container *ngFor="let size of psizes; let j = index">
                             <option [value]="j">{{size.psizeName}}</option>
                         </ng-container>
@@ -49,6 +49,6 @@
         </ng-container>
     </ng-container>
     <tr>
-        <td><button (click)="addPizzaToOrder(selectedPizzaSize.value)">Add Pizza To Order</button></td>
+        <td><button (click)="addPizzaToOrder(selectedPizzaSize.value)">Update Pizza</button></td>
     </tr>
 </table>

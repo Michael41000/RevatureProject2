@@ -1,0 +1,17 @@
+<h1>Welcome {{globalService.currentPerson.firstName}} {{globalService.currentPerson.lastName}}</h1>
+<p> Our Specialty Pizzas </p>
+
+<table class="table borderless">
+  <thead class="thead-dark">
+    <tr>
+      <th>Pizza</th>
+      <th>Size</th>
+      <th>Total Calories</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <ng-container *ngFor="let pizza of allSPizza; let i = index">
+    <tbody app-pizza [props]="{pizza: pizza, index: i, pizzaArrayLength: allSPizza.length}"></tbody>
+  </ng-container>
+</table>

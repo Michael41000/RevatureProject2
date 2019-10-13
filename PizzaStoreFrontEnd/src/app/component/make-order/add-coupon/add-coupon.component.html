@@ -1,0 +1,15 @@
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Discount Percent</th>
+        <th>Code</th>
+        <th>Description</th>
+    </tr>
+    <tr *ngFor="let coupon of coupons">
+        <td>{{ coupon.couponId }}</td>
+        <td>{{ coupon.discountPercent }}%</td>
+        <td>{{ coupon.code }}</td>
+        <td>{{ coupon.description }}</td>
+        <td><button (click)="addCouponToOrder(coupon)">Add Coupon To Order</button></td>
+    </tr>
+</table>

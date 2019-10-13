@@ -6,6 +6,9 @@
         <td><button (click)="addPizza()">Add Pizza</button></td>
         <td><button (click)="confirmOrder()">Confirm Order</button></td>
         <td><button (click)="cancelOrder()">Cancel Order</button></td>
+        <td *ngIf="globalService.currentOrder.coupon === null"><button (click)="addCoupon()">Add Coupon</button></td>
+        <td *ngIf="globalService.currentOrder.coupon"><button (click)="deleteCoupon()">Remove Coupon</button></td>
+        <th *ngIf="globalService.currentOrder.coupon">Current Discount: {{ globalService.currentOrder.coupon.discountPercent }}%</th>
     </tr>
     <tr>
         <th>Id</th>
@@ -16,11 +19,12 @@
     <ng-container *ngFor="let pizza of globalService.currentOrder.pizzasInOrder; let i = index;">
         <tr>
             <td>{{ i + 1 }}</td>
-            <td>{{pizza.psize.psizeName }}</td>
+            <td>{{ pizza.psize.psizeName }}</td>
             <td>{{ calculatePizzaPrice(pizza) | currency: 'USD' }}</td>
             <td>{{ calculatePizzaCalories(pizza)}}</td>
             <td *ngIf="pizza.showIngredients === undefined"><button (click)="showIngredients(pizza)">Show</button></td>
             <td *ngIf="pizza.showIngredients"><button (click)="hideIngredients(pizza)">Hide</button></td>
+            <td><button (click)="addToFavourites(i)">Favorite</button></td>
             <td><button (click)="editPizza(i)">Edit</button></td>
             <td><button (click)="removePizza(i)">Remove</button></td>
         </tr>
