@@ -16,7 +16,7 @@
     <ng-container *ngFor="let pizza of globalService.currentOrder.pizzasInOrder; let i = index;">
         <tr>
             <td>{{ i + 1 }}</td>
-            <td>{{pizza.psize.psizeName }}</td>
+            <td>{{ pizza.psize.psizeName }}</td>
             <td>{{ calculatePizzaPrice(pizza) | currency: 'USD' }}</td>
             <td>{{ calculatePizzaCalories(pizza)}}</td>
             <td *ngIf="pizza.showIngredients === undefined"><button (click)="showIngredients(pizza)">Show</button></td>

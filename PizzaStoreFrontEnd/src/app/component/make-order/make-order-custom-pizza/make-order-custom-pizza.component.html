@@ -7,7 +7,7 @@
     </tr>
     <tr>
         <th>Pizza Size:</th>
-        <td><select #selectedPizzaSize>
+        <td><select #selectedPizzaSize (change)="calculatePizzaPrice(selectedPizzaSize.value)">
                 <ng-container *ngFor="let size of psizes; let i = index">
                     <option [value]="i">{{size.psizeName}}</option>
                 </ng-container>
@@ -35,8 +35,8 @@
                 <td> {{inventoryItem.topping.toppingName }}</td>
                 <td> {{inventoryItem.topping.calories }}</td>
                 <td> {{inventoryItem.location.name }}</td>
-                <td> {{inventoryItem.price | currency : 'USD'}}</td>
-                <td><select #selectedAmount >
+                <td> {{calculateInventoryItemPrice(inventoryItem, selectedAmount.value) | currency : 'USD'}}</td>
+                <td><select #selectedAmount (change)="calculateInventoryItemPrice(inventoryItem, selectedAmount.value)">
                         <ng-container *ngFor="let size of psizes; let j = index">
                             <option [value]="j">{{size.psizeName}}</option>
                         </ng-container>

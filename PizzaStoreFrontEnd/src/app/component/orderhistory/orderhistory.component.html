@@ -1,17 +1,15 @@
 <h1>Your Order History</h1>
 
 <table class="table borderless">
-    <thead class="thead-dark">
-        <tr>
-            <th>Store</th>
-            <th>Date Order</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
+    <tr>
+        <th>Store</th>
+        <th>Date Order</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
 
-    <ng-container *ngFor="let porder of allOrders">
+    <ng-container *ngFor="let porder of allOrders; let j = index">
         <tr>
             <td>{{porder.store.location.name}}</td>
             <td>{{porder.timeOrdered}}</td>
@@ -20,40 +18,26 @@
             <td *ngIf="porder.visible"><button (click)="hide(porder)">hide</button></td>
         </tr>
         <ng-container *ngIf="porder.visible">
+            <tr>
+                <th>Pizza</th>
+                <th>Size</th>
+                <th>Total Calories</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
             <ng-container *ngFor="let pizza of porder.pizzasInOrder; let i = index">
-                <tr>
-                    <thead class="thead-light">
-                        <th>Order: {{i + 1}}</th>
-                    </thead>
-                </tr>
-                <tr>
-                    <th>Toppings</th>
-                    <th>Name</th>
-                    <th>Calories</th>
-                    <th>Size</th>
-                    <th>Price</th>
-                </tr>
-                <ng-container *ngFor="let i of pizza.inventoryItems">
-                    <tr>
-                        <td></td>
-                        <td>{{i.inventoryItem.topping.toppingName}}</td>
-                        <td>{{i.inventoryItem.topping.calories}}</td>
-                        <td>{{i.amount.psizeName}}</td>
-                        <td>{{(i.inventoryItem.price * i.amount.multiplier) | currency : 'USD'}}</td>
-                    </tr>
-                </ng-container>
-                <tr>
-                    <td><b>Pizza Size:</b> {{pizza.psize.psizeName}}</td>
-                    <td></td>
-                    <td><b>Total Calories:</b> {{toppingTotalCalories(pizza)}}</td>
-                    <td></td>
-                    <td><b>Total Price: </b> {{toppingTotalPrice(pizza) | currency : 'USD'}}</td>
-                </tr>
+                <tbody app-pizza [props]="{pizza: pizza, index: i, pizzaArrayLength: porder.pizzasInOrder.length}">
+                </tbody>
             </ng-container>
+            <tr *ngIf="j !== allOrders.length - 1">
+                <th>Store</th>
+                <th>Date Order</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
         </ng-container>
-        <tr>
 
-        </tr>
     </ng-container>
 
 </table>

@@ -151,4 +151,9 @@ export class MakeOrderCustomPizzaComponent implements OnInit {
 
     return baseCalories;
   }
+
+  calculateInventoryItemPrice(inventoryItem: inventoryItem, psizeIndex: number) {
+    console.log(psizeIndex);
+    return inventoryItem.price * this.psizes[psizeIndex].multiplier;
+  }
 }
