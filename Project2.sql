@@ -402,3 +402,5 @@ commit;
 
 SELECT * FROM person;
 
+SELECT DISTINCT name, i_id, topping_id, amount_left, price, location_id, store_id, t_id, calories, type_id FROM Inventory_Item i JOIN Topping t ON i.topping_id = t.t_id;
+

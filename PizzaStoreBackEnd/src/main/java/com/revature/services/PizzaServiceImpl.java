@@ -32,9 +32,8 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
-	public Pizza deletePizza(Pizza pizza) {
+	public void deletePizza(Pizza pizza) {
 		pizzar.delete(pizza);
-		return pizza;
 	}
 
 	@Override

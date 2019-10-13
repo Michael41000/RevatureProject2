@@ -21,7 +21,7 @@ public class PizzaInventoryItem {
 	@GeneratedValue(generator = "pii_seq", strategy = GenerationType.SEQUENCE)
 	private int piiId;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ii_id")
 	private InventoryItem inventoryItem;
 

@@ -10,5 +10,7 @@ import com.revature.models.Coupon;
 @Repository
 public interface CouponRepository extends CrudRepository<Coupon, Integer>{
 	List<Coupon> findByCode(double code);
+
+	List<Coupon> findByActiveTrue();
 	
 }

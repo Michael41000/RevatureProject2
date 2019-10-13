@@ -11,7 +11,7 @@ public interface PizzaService {
 
 	public Pizza updatePizza(Pizza pizza);
 
-	public Pizza deletePizza(Pizza pizza);
+	public void deletePizza(Pizza pizza);
 	
 	public List<Pizza> getAllPizzas();
 	
