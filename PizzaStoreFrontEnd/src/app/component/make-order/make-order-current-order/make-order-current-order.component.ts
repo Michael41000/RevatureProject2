@@ -136,6 +136,7 @@ export class MakeOrderCurrentOrderComponent implements OnInit {
 
   addToFavourites(pizzaIndex: number) {
     this.globalService.currentPerson.favorites.push(this.globalService.currentOrder.pizzasInOrder[pizzaIndex]);
+    console.log(this.globalService.currentOrder.pizzasInOrder[pizzaIndex]);
     this.subs.add(this.personService.updatePerson(this.globalService.currentPerson).subscribe(
       (response) => {
         console.log(response);

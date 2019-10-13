@@ -145,7 +145,7 @@ export class EditFavoritesComponent implements OnInit {
   }
 
   updatePizza(pizzaSizeIndex: number) {
-    const newPizza = new pizza(this.oldPizza.pizzaId, this.psizes[pizzaSizeIndex], true, this.pizzaIngredients)
+    const newPizza = new pizza(this.oldPizza.pizzaId, this.psizes[pizzaSizeIndex], false, this.pizzaIngredients)
     this.globalService.currentPerson.favorites[this.oldPizzaIndex] = newPizza;
     this.subs.add(this.personService.updatePerson(this.globalService.currentPerson).subscribe(
       (response) => {
