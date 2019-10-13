@@ -14,20 +14,19 @@ export class StoreInventoryComponent implements OnInit {
   constructor(private route: ActivatedRoute, private inventoryitemService: InventoryitemService) { }
 
   ngOnInit() {
-    this.parentParamSub = this.route.parent.params.subscribe(params => {
+    this.subs.add(this.route.parent.params.subscribe(params => {
       this.storeId = +params["id"];
       this.showInventory();
-    });
+    }));
   }
 
   inventoryItems: inventoryItem[];
-  parentParamSub: Subscription;
-  inventoryItemsByStoreSub: Subscription;
-  inventoryItemsUpdateSubs: Subscription = new Subscription();
   storeId: number;
 
+  subs: Subscription = new Subscription();
+
   showInventory() {
-    this.inventoryItemsByStoreSub = this.inventoryitemService.getInventoryItemsByStore(this.storeId).subscribe(
+    this.subs.add(this.inventoryitemService.getInventoryItemsByStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.inventoryItems = response;
@@ -35,7 +34,7 @@ export class StoreInventoryComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ))
   }
 
   changeReorder(inventoryItem: any) {
@@ -76,7 +75,7 @@ export class StoreInventoryComponent implements OnInit {
     if ((gotInventoryItem.newPrice !== null || gotInventoryItem.orderAmount !== null) &&
       (gotInventoryItem.newPrice !== undefined || gotInventoryItem.orderAmount !== undefined)) {
         console.log(updatedInventoryItem);
-        this.inventoryItemsUpdateSubs.add(this.inventoryitemService.updateInventoryItem(updatedInventoryItem).subscribe(
+        this.subs.add(this.inventoryitemService.updateInventoryItem(updatedInventoryItem).subscribe(
           (response) => {
             console.log("response");
             console.log(response);
@@ -91,10 +90,8 @@ export class StoreInventoryComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-    this.parentParamSub.unsubscribe();
-    this.inventoryItemsByStoreSub.unsubscribe();
-    this.inventoryItemsUpdateSubs.unsubscribe();
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

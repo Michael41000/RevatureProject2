@@ -4,6 +4,7 @@ import { PizzaService } from 'src/app/service/pizza.service';
 import { pizzaInventoryItem } from 'src/app/model/pizzaInventoryItem';
 import { GlobalService } from 'src/app/service/global.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-make-order-specialty-pizza',
@@ -19,14 +20,15 @@ export class MakeOrderSpecialtyPizzaComponent implements OnInit {
   }
 
   pizzas: pizza[];
+  subs: Subscription = new Subscription();
 
   getSpecialtyPizzas() {
-    this.pizzaService.getSpecialtyPizzas().subscribe(
+    this.subs.add(this.pizzaService.getSpecialtyPizzas().subscribe(
       (response) => {
         this.pizzas = response;
         console.log(response);
       }
-    )
+    ));
   }
 
   addToOrder(newPizza: pizza) {
@@ -70,5 +72,9 @@ export class MakeOrderSpecialtyPizzaComponent implements OnInit {
     baseCalories *= pizza.psize.multiplier;
 
     return baseCalories;
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 }

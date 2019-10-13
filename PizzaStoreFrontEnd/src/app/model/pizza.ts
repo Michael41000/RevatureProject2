@@ -5,13 +5,13 @@ export class pizza {
 
     pizzaId: number;
     psize: psize;
-    isSpecialty: boolean;
+    specialty: boolean;
     inventoryItems: pizzaInventoryItem[];
 
     constructor(pizzaId: number, psize: psize, isSpecialty: boolean, inventoryItems: pizzaInventoryItem[]) {
         this.pizzaId = pizzaId;
         this.psize = psize;
-        this.isSpecialty = isSpecialty;
+        this.specialty = isSpecialty;
         this.inventoryItems = inventoryItems;
     }
 

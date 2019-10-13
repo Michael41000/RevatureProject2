@@ -23,4 +23,8 @@ export class CouponService {
   updateCoupon(coupon: coupon) : Observable<coupon> {
     return this.http.put<coupon>(`${this.globalService.hostName}/coupons/${coupon.couponId}`, coupon)
   }
+
+  getActiveCoupons() : Observable<coupon[]> {
+    return this.http.get<coupon[]>(`${this.globalService.hostName}/coupons/active`)
+  }
 }

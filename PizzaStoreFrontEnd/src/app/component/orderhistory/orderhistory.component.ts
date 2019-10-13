@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/service/global.service';
 import { porder } from 'src/app/model/porder';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PorderService } from 'src/app/service/porder.service';
 import { inventoryItem } from 'src/app/model/inventoryItem';
 import { InventoryitemService } from 'src/app/service/inventoryitem.service';
@@ -26,23 +26,25 @@ export class OrderhistoryComponent implements OnInit {
   allPizzaInventoryItem : inventoryItem[] = [];
   allPIItem : Observable<inventoryItem[]> = this.inventoryitem.getInventoryItems();
 
+  subs: Subscription = new Subscription();
+
 
   allPersonOrder(){
-    this.allPOrder.subscribe(
+    this.subs.add(this.allPOrder.subscribe(
       (response)=>{
         console.log(response);
         this.allOrders = response; 
       }
-    );
+    ));
   }
 
   allInventoryItems(){
-    this.allPIItem.subscribe(
+    this.subs.add(this.allPIItem.subscribe(
       (response)=>{
         console.log(response);
         this.allPizzaInventoryItem = response;
       }
-    );
+    ));
   }
 
   show(porder : any){
@@ -70,6 +72,10 @@ export class OrderhistoryComponent implements OnInit {
     }
 
     return total * pizzaPast.psize.multiplier; 
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

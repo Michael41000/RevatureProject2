@@ -14,19 +14,19 @@ export class StoreOrdersComponent implements OnInit {
   constructor(private route: ActivatedRoute, private porderService: PorderService) { }
 
   ngOnInit() {
-    this.parentParamSub = this.route.parent.params.subscribe(params => {
+    this.subs.add(this.route.parent.params.subscribe(params => {
       this.storeId = +params["id"];
       this.showOrders();
-    });
+    }));
   }
 
   orders: porder[];
-  parentParamSub: Subscription;
-  pordersByStoreSub: Subscription;
   storeId: number;
 
+  subs: Subscription = new Subscription();
+
   showOrders() {
-    this.pordersByStoreSub = this.porderService.getPOrdersByStore(this.storeId).subscribe(
+    this.subs.add(this.porderService.getPOrdersByStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.orders = response;
@@ -34,14 +34,13 @@ export class StoreOrdersComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ));
   }
 
   
 
-  ngOnDestroy() {
-    this.parentParamSub.unsubscribe();
-    this.pordersByStoreSub.unsubscribe();
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
   

@@ -12,7 +12,7 @@
     <ng-container *ngFor="let porder of allOrders; let j = index">
         <tr>
             <td>{{porder.store.location.name}}</td>
-            <td>{{porder.timeOrdered}}</td>
+            <td>{{porder.timeOrdered | date: 'short'}}</td>
             <td></td>
             <td *ngIf="porder.visible === undefined"><button (click)="show(porder)">show</button></td>
             <td *ngIf="porder.visible"><button (click)="hide(porder)">hide</button></td>

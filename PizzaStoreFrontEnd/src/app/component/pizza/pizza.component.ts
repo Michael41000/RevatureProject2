@@ -8,9 +8,6 @@ import { pizza } from 'src/app/model/pizza';
 })
 export class PizzaComponent implements OnInit {
 
-  //@Input("pizza") pizza: pizza;
-  //@Input("index") index: number;
-  //@Input("pizzaArrayLength") pizzaArrayLength: number;
   @Input() props: { pizza: pizza, index: number, pizzaArrayLength: number };
 
   constructor() { }

@@ -1,0 +1,48 @@
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Size</th>
+        <th>Price</th>
+        <th>Calories</th>
+    </tr>
+    <ng-container *ngFor="let pizza of globalService.currentPerson.favorites; let i = index;">
+        <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{pizza.psize.psizeName }}</td>
+            <td>{{ calculatePizzaPrice(pizza) | currency: 'USD' }}</td>
+            <td>{{ calculatePizzaCalories(pizza)}}</td>
+            <td *ngIf="pizza.showIngredients === undefined"><button (click)="showIngredients(pizza)">Show</button></td>
+            <td *ngIf="pizza.showIngredients"><button (click)="hideIngredients(pizza)">Hide</button></td>
+            <td><button (click)="editPizza(i)">Edit</button></td>
+            <td><button (click)="removePizza(pizza, i)">Remove</button></td>
+        </tr>
+        <ng-container *ngIf="pizza.showIngredients">
+            <tr>
+                <th>Topping</th>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Amount</th>
+            </tr>
+            <ng-container *ngFor="let j of pizza.inventoryItems">
+                <tr>
+                    <td></td>
+                    <td>{{ j.inventoryItem.topping.toppingName }}</td>
+                    <td>{{ j.inventoryItem.topping.calories }}</td>
+                    <td>{{ j.inventoryItem.location.name }}</td>
+                    <td>{{ (j.inventoryItem.price * j.amount.multiplier) | currency: 'USD' }}</td>
+                    <td>{{ j.amount.psizeName }}</td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="!(i === globalService.currentPerson.favorites.length - 1)">
+                <tr>
+                    <th>Id</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Calories</th>
+                </tr>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</table>

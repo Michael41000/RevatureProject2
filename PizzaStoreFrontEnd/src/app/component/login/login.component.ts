@@ -19,13 +19,13 @@ export class LoginComponent implements OnInit {
 
   invalidCredentials: boolean = false;
   person: person = new person();
-  loginSubscription: Subscription;
+  subs: Subscription = new Subscription();
 
   login() {
     this.invalidCredentials = false;
     console.log(this.person.username);
     console.log(this.person.password);
-    this.loginSubscription = this.personService.getPersonByUsernameAndPassword(this.person)
+    this.subs.add(this.personService.getPersonByUsernameAndPassword(this.person)
       .subscribe(
         (response) => {
           this.globalService.currentPerson = response;
@@ -35,16 +35,15 @@ export class LoginComponent implements OnInit {
         (response) => {
           this.invalidCredentials = true;
         }
-      );
+      ));
   }
 
   goToHomepage() {                                                // Routes to the Homepage
     this.router.navigate(["homepage"]).then((e) => { })
   }
 
-
   ngOnDestory() {
-    this.loginSubscription.unsubscribe();
+    this.subs.unsubscribe();
   }
 
 }

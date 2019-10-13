@@ -4,6 +4,7 @@ import { SignupcontrollerService } from "src/app/service/signupcontroller.servic
 import { person } from "src/app/model/person";
 import { Router } from '@angular/router';
 import { location } from 'src/app/model/location';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-signup",
@@ -27,11 +28,13 @@ export class SignupComponent implements OnInit {
   person: person;
   usernameTaken: boolean = false;
 
+  subs: Subscription = new Subscription();
+
 
   createAccount() {
     this.validateInputs()
     if (this.invalidInputs === false) {
-      this.googleService
+      this.subs.add(this.googleService
         .addressToCoordinates(
           this.person.location.streetAddress,
           this.person.location.city,
@@ -43,7 +46,7 @@ export class SignupComponent implements OnInit {
           this.person.location.latitude = response.results[0].geometry.location.lat;
           this.person.location.longitude = response.results[0].geometry.location.lng;
           this.person.location.name = `${this.person.location.streetAddress}, ${this.person.location.city} ${this.person.location.state}, ${this.person.location.zipcode}`;
-          this.locationService.addPerson(this.person).subscribe(
+          this.subs.add(this.locationService.addPerson(this.person).subscribe(
             (response) => {
               console.log(response);
               this.router.navigate(["login"]).then((e) => { });
@@ -51,8 +54,8 @@ export class SignupComponent implements OnInit {
             (response) => {
               this.usernameTaken = true;
             }
-          );
-        });
+          ));
+        }));
     }
   }
 
@@ -79,5 +82,9 @@ export class SignupComponent implements OnInit {
     } else {
       this.invalidInputs = false;
     }
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 }

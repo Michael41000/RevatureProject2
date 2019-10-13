@@ -24,7 +24,7 @@
       <a class="nav-link" routerLink="orderhistory">Order History</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="favorites">Favorites</a>
+      <a class="nav-link" routerLink="favorites/listpizzas">Favorites</a>
     </li>
 
     <ng-container *ngIf="globalService.currentPerson.role.roleName === 'Employee'">
@@ -32,10 +32,10 @@
         <a class="nav-link" routerLink="stores">Store</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="managespecialtypizzas">Manage Specialty Pizzas</a>
+        <a class="nav-link" routerLink="managespecialtypizzas/listpizzas">Manage Specialty Pizzas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="managecoupons">Manage Coupons</a>
+        <a class="nav-link" routerLink="coupons">Manage Coupons</a>
       </li>
     </ng-container>
     <li class="nav-item">

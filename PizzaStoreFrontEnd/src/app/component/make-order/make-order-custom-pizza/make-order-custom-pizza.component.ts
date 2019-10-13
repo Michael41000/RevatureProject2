@@ -9,6 +9,7 @@ import { inventoryItem } from 'src/app/model/inventoryItem';
 import { pizza } from 'src/app/model/pizza';
 import { pizzaInventoryItem } from 'src/app/model/pizzaInventoryItem';
 import { GlobalService } from 'src/app/service/global.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-make-order-custom-pizza',
@@ -42,17 +43,19 @@ export class MakeOrderCustomPizzaComponent implements OnInit {
 
   storeId: number;
 
+  subs: Subscription = new Subscription();
+
   getSizes() {
-    this.psizeService.getPSizes().subscribe(
+    this.subs.add(this.psizeService.getPSizes().subscribe(
       (response) => {
         console.log(response);
         this.psizes = response;
       }
-    )
+    ));
   }
 
   getInventoryItemsByStore() {
-    this.inventoryItemService.getInventoryItemsByStore(this.storeId).subscribe(
+    this.subs.add(this.inventoryItemService.getInventoryItemsByStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.allInventoryItems = response;
@@ -70,7 +73,7 @@ export class MakeOrderCustomPizzaComponent implements OnInit {
 
 
       }
-    )
+    ));
   }
 
   showInventoryItemsByTopping(toppingtype: any) {
@@ -84,13 +87,13 @@ export class MakeOrderCustomPizzaComponent implements OnInit {
   }
 
   getToppingTypes() {
-    this.toppingtypeService.getToppingTypes().subscribe(
+    this.subs.add(this.toppingtypeService.getToppingTypes().subscribe(
       (response) => {
         console.log(response);
         this.toppingtypes = response;
         this.getInventoryItemsByStore();
       }
-    )
+    ));
   }
 
   addToPizza(inventoryItemPassed: any, psizeIndex: number) {
@@ -155,5 +158,9 @@ export class MakeOrderCustomPizzaComponent implements OnInit {
   calculateInventoryItemPrice(inventoryItem: inventoryItem, psizeIndex: number) {
     console.log(psizeIndex);
     return inventoryItem.price * this.psizes[psizeIndex].multiplier;
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 }

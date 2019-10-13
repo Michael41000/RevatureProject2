@@ -8,6 +8,8 @@ import { CouponsComponent } from './component/coupons/coupons.component';
 import { MakeOrderComponent } from './component/make-order/make-order.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
+import { ManageSpecialtyPizzaComponent } from './component/manage-specialty-pizza/manage-specialty-pizza.component';
+import { FavoritesComponent } from './component/favorites/favorites.component';
 
 
 const routes: Routes = [
@@ -19,11 +21,13 @@ const routes: Routes = [
   { path: "makeOrder", component: MakeOrderComponent },
   { path: "homepage", component: HomepageComponent },
   { path: "orderhistory", component: OrderhistoryComponent },
+  { path: 'managespecialtypizzas', component: ManageSpecialtyPizzaComponent },
+  { path: 'favorites', component: FavoritesComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -7,6 +7,7 @@ import { MakeOrderSpecialtyPizzaComponent } from './make-order-specialty-pizza/m
 import { MakeOrderCurrentOrderComponent } from './make-order-current-order/make-order-current-order.component';
 import { MakeOrderCustomPizzaComponent } from './make-order-custom-pizza/make-order-custom-pizza.component';
 import { MakeOrderUpdateCustomPizzaComponent } from './make-order-update-custom-pizza/make-order-update-custom-pizza.component';
+import { AddCouponComponent } from './add-coupon/add-coupon.component';
 
 const makeOrderRoutes: Routes = [
     {
@@ -20,9 +21,12 @@ const makeOrderRoutes: Routes = [
             },
             {
                 path: 'currentOrder', component: MakeOrderCurrentOrderComponent
-            }, 
+            },
             {
                 path: 'customPizza/:id', component: MakeOrderUpdateCustomPizzaComponent
+            },
+            {
+                path: 'coupons', component: AddCouponComponent
             }
         ]
     }

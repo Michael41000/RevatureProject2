@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/service/store.service';
 import { store } from 'src/app/model/store';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stores',
@@ -17,9 +18,10 @@ export class StoresComponent implements OnInit {
   }
 
   stores: store[] = [];
+  subs: Subscription = new Subscription();
 
   displayAllStores() {
-    this.storeService.getAllStores().subscribe(
+    this.subs.add(this.storeService.getAllStores().subscribe(
       (response) => {
         console.log(response);
         this.stores = response;
@@ -28,7 +30,7 @@ export class StoresComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ));
   }
 
   goToStore(store: store) {
@@ -40,6 +42,10 @@ export class StoresComponent implements OnInit {
         console.log("Navigation has failed!");
       }
     });
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

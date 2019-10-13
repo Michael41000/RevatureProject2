@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { person } from 'src/app/model/person';
-import { location } from 'src/app/model/location';
 import { GlobalService } from 'src/app/service/global.service';
 import { GoogleService } from 'src/app/service/google.service';
-import { LocationService } from 'src/app/service/location.service';
 import { PersonService } from 'src/app/service/person.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +13,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(private globalService: GlobalService,
     private googleService: GoogleService,
-    private locationService: LocationService,
     private personService: PersonService) { }
 
   ngOnInit() {
@@ -24,11 +21,12 @@ export class ProfileComponent implements OnInit {
 
   invalidInputs: boolean = false;
   validation: string = "Some fields are empty";
+  subs: Subscription = new Subscription();
 
   updateProfile() {
     this.validateInputs();
     if (this.invalidInputs === false) {
-      this.googleService
+      this.subs.add(this.googleService
         .addressToCoordinates(
           this.globalService.currentPerson.location.streetAddress,
           this.globalService.currentPerson.location.city,
@@ -40,11 +38,11 @@ export class ProfileComponent implements OnInit {
           this.globalService.currentPerson.location.latitude = response.results[0].geometry.location.lat;
           this.globalService.currentPerson.location.longitude = response.results[0].geometry.location.lng;
           this.globalService.currentPerson.location.name = `${this.globalService.currentPerson.location.streetAddress}, ${this.globalService.currentPerson.location.city} ${this.globalService.currentPerson.location.state}, ${this.globalService.currentPerson.location.zipcode}`;
-          this.personService.updatePerson(this.globalService.currentPerson).subscribe(
+          this.subs.add(this.personService.updatePerson(this.globalService.currentPerson).subscribe(
             (response) => {
               console.log(response);
-            });
-        });
+            }));
+        }));
     }
   }
 
@@ -71,6 +69,10 @@ export class ProfileComponent implements OnInit {
     } else {
       this.invalidInputs = false;
     }
+  }
+
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

@@ -25,6 +25,16 @@ import { MakeOrderUpdateCustomPizzaComponent } from './component/make-order/make
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { OrderhistoryComponent } from './component/orderhistory/orderhistory.component';
 import { PizzaComponent } from './component/pizza/pizza.component';
+import { ManageSpecialtyPizzaComponent } from './component/manage-specialty-pizza/manage-specialty-pizza.component';
+import { AddPizzaComponent } from './component/manage-specialty-pizza/add-pizza/add-pizza.component';
+import { ListPizzasComponent } from './component/manage-specialty-pizza/list-pizzas/list-pizzas.component';
+import { ManageSpecialtyPizzaRoutingModule } from './component/manage-specialty-pizza/manage-specialty-pizza-routing.module';
+import { EditPizzaComponent } from './component/manage-specialty-pizza/edit-pizza/edit-pizza.component';
+import { AddCouponComponent } from './component/make-order/add-coupon/add-coupon.component';
+import { FavoritesComponent } from './component/favorites/favorites.component';
+import { FavoritesRoutingModule } from './component/favorites/favorites-routing.module';
+import { ListFavoritesComponent } from './component/favorites/list-favorites/list-favorites.component';
+import { EditFavoritesComponent } from './component/favorites/edit-favorites/edit-favorites.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +56,15 @@ import { PizzaComponent } from './component/pizza/pizza.component';
     MakeOrderUpdateCustomPizzaComponent,
     HomepageComponent,
     OrderhistoryComponent,
-    PizzaComponent
+    PizzaComponent,
+    ManageSpecialtyPizzaComponent,
+    AddPizzaComponent,
+    ListPizzasComponent,
+    EditPizzaComponent,
+    AddCouponComponent,
+    FavoritesComponent,
+    ListFavoritesComponent,
+    EditFavoritesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +73,9 @@ import { PizzaComponent } from './component/pizza/pizza.component';
     FormsModule,
     NgbModule,
     StoreRoutingModule,
-    MakeOrderRoutingModule
+    MakeOrderRoutingModule,
+    ManageSpecialtyPizzaRoutingModule,
+    FavoritesRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

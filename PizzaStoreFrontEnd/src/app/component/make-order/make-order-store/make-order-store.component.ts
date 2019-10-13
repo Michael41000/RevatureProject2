@@ -16,11 +16,11 @@ export class MakeOrderStoreComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.paramSub = this.route.params.subscribe(params => {
+    this.subs.add(this.route.params.subscribe(params => {
       this.storeId = +params["id"];
-    });
+    }));
 
-    this.storeSub = this.storeService.getStore(this.storeId).subscribe(
+    this.subs.add(this.storeService.getStore(this.storeId).subscribe(
       (response) => {
         console.log(response);
         this.store = response;
@@ -28,14 +28,13 @@ export class MakeOrderStoreComponent implements OnInit {
       (response) => {
 
       }
-    )
+    ));
   }
 
   storeId: number;
   store: store;
-  paramSub: Subscription;
-  storeSub: Subscription;
   pizzaType: any;
+  subs: Subscription = new Subscription();
 
   selectChangeHandler(event: any) {
     const pizzaOption = event.target.value;
@@ -59,9 +58,8 @@ export class MakeOrderStoreComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-    this.paramSub.unsubscribe();
-    this.storeSub.unsubscribe();
+  ngOnDestory() {
+    this.subs.unsubscribe();
   }
 
 }

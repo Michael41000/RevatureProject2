@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/service/global.service';
 import { SpecialtypizzaService } from 'src/app/service/specialtypizza.service';
 import { pizza } from 'src/app/model/pizza';
-import { Observable } from 'rxjs';
-import { HighlightDelayBarrier } from 'blocking-proxy/built/lib/highlight_delay_barrier';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
@@ -12,29 +11,28 @@ import { HighlightDelayBarrier } from 'blocking-proxy/built/lib/highlight_delay_
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private globalService: GlobalService, private specialtyPizza : SpecialtypizzaService) { }
+  constructor(private globalService: GlobalService, private specialtyPizza: SpecialtypizzaService) { }
 
   ngOnInit() {
     this.SpecialtyPizza();
   }
 
-  allSPizza : pizza[] = [];
-  allSpecialty : Observable<pizza[]> = this.specialtyPizza.getAllSpecialtyPizza();
+  allSPizza: pizza[] = [];
+  allSpecialty: Observable<pizza[]> = this.specialtyPizza.getAllSpecialtyPizza();
+  subs: Subscription = new Subscription();
 
-  SpecialtyPizza(){
-    this.allSpecialty.subscribe(
-      (response)=>{
+  SpecialtyPizza() {
+    this.subs.add(this.allSpecialty.subscribe(
+      (response) => {
         console.log(response);
         this.allSPizza = response;
       }
-    );
+    ));
   }
 
-  
-
-  
-
-  
+  ngOnDestory() {
+    this.subs.unsubscribe();
+  }
 }
 
 
