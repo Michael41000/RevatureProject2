@@ -324,7 +324,7 @@ INSERT INTO topping VALUES(topping_id_maker.nextval, 'Coriander', 23, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Paprika', 19, 5);
 INSERT INTO topping VALUES(topping_id_maker.nextval, 'Black Pepper', 17, 5);
 
-insert into coupon values (coupon_id_maker.nextval, 10, 55, '???', 'T');
+insert into coupon values (coupon_id_maker.nextval, 10, 55, '???', 'F');
 INSERT INTO person values(person_id_maker.nextval, 'kush', 'patel', 'kush9001', 'password', 1, 1);  -- test
 
 
@@ -489,6 +489,7 @@ insert into person_pizza values(2, 8);
 
 
 
+INSERT INTO coupon values(coupon_id_maker.nextval, 15, 1500, '15% off', 'T');
 
 
 
