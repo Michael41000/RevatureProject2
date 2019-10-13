@@ -43,7 +43,7 @@ public class POrder {
 	@JoinColumn(name = "coupon_id")
 	private Coupon coupon;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "porder_pizza", joinColumns = @JoinColumn(name = "porder_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
 	private List<Pizza> pizzasInOrder;
 
