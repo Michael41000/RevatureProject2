@@ -35,6 +35,7 @@ import { FavoritesComponent } from './component/favorites/favorites.component';
 import { FavoritesRoutingModule } from './component/favorites/favorites-routing.module';
 import { ListFavoritesComponent } from './component/favorites/list-favorites/list-favorites.component';
 import { EditFavoritesComponent } from './component/favorites/edit-favorites/edit-favorites.component';
+import { MakeOrderFavoriteComponent } from './component/make-order/make-order-favorite/make-order-favorite.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { EditFavoritesComponent } from './component/favorites/edit-favorites/edi
     AddCouponComponent,
     FavoritesComponent,
     ListFavoritesComponent,
-    EditFavoritesComponent
+    EditFavoritesComponent,
+    MakeOrderFavoriteComponent
   ],
   imports: [
     BrowserModule,
